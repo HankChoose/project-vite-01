@@ -1,0 +1,22 @@
+.root {
+    text-align: center;
+  }
+  .Button {
+    width: 300px;
+    font-size: auto;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #2d70c9;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 0.2em;
+    &:hover {
+      border: 1px solid #98c5e8;
+      outline: unset;
+      box-shadow: 0 0 6px #5e94da;
+      background-color: #5e94da;
+    }
+    color: #ffffff;
+  }
+  

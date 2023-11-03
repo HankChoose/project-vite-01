@@ -1,0 +1,28 @@
+[  
+    {
+        "name": "React-Icons",
+        "components": [
+            {
+                "filePath": "antd",
+                "exportName": "Progress",
+                "name": "Progress Bar"
+            },
+            {
+                "filePath": "antd",
+                "exportName": "Button",
+                "name": "Button"
+            },
+            {
+                "filePath": "react-icons/rx",
+                "exportName": "RxEyeOpen",
+                "name": "RxEyeOpen"
+            },
+
+            {
+                "filePath": "react-icons/rx",
+                "exportName": "RxEyeClosed",
+                "name": "RxEyeClosed"
+            }
+        ]
+    }
+]  
