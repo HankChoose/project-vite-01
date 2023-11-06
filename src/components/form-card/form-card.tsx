@@ -96,9 +96,7 @@ export const FormCard = ({ className, formType = 'signin', children, callbackFun
         <div className={classNames(styles.root, className)}>
             <a href="https://zhiyouyuec.com">Home</a>
             {children}
-            <h1>
-                
-                {titlecard}</h1>
+            <h1> {titlecard}</h1>
             {linkheader}<span className={styles.handpoint}>{linksign}</span>
             <FormRow />
             <FormRow children={<Input />} />

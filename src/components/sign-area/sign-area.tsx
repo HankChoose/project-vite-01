@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import styles from './sign-area.module.scss';
-import { useState } from 'react';
 import { FormCard } from '../form-card/form-card';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { Resetpw } from '../resetpw/resetpw';
-import React from 'react'
+import React,{ useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 
 export interface SignAreaProps {
     className?: string;
@@ -19,6 +18,7 @@ function GotoSignup() {
     <div></div>
   );
 }
+
 function GotoSignin() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
@@ -27,7 +27,6 @@ function GotoSignin() {
     return (
      <div></div>
     );
-
 }
 
 function GotoResetpw() {
@@ -39,9 +38,8 @@ function GotoResetpw() {
     <div></div>
     );
 }
-export const SignArea = ({ className }: SignAreaProps) => {
 
-    
+export const SignArea = ({ className }: SignAreaProps) => {
 
     const [isInternalControlClicked, setInternalControlClicked] = useState('');
     const handleInternalControlClick = (value: string) => {

@@ -1,8 +1,6 @@
 const initialState = {
   name: "",
   email: "",
-  applytype: "",
-  requirements: ""
 };
 
 // 定义 action 类型
@@ -17,10 +15,6 @@ const userInfoReducer = (state = initialState, action: MyAction) => {
       return { ...state, name: action.payload };
     case "UPDATE_EMAIL":
       return { ...state, email: action.payload };
-    case "UPDATE_APPLYTYPE":
-      return { ...state, applytype: action.payload };
-    case "UPDATE_REQUIREMENTS":
-      return { ...state, requirements: action.payload };
     default:
       return state;
   }
