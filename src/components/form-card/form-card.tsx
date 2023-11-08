@@ -22,38 +22,12 @@ export interface FormCardProps {
  */
 
 
-export const FormCard = ({ className, formType = 'signin', children, callbackFunction }: FormCardProps) => {
-    const handleClickSignup = () => {
-        const valueToSend = 'signup';
-        if (callbackFunction !== undefined) {
-            callbackFunction(valueToSend);
-        } else {
-            // 处理函数未定义的情况
-        }
-    };
-
-    const handleClickSignin = () => {
-        const valueToSend = 'signin';
-        if (callbackFunction !== undefined) {
-            callbackFunction(valueToSend);
-        } else {
-            // 处理函数未定义的情况
-        }
-    };
-
-    const handleClickResetpw = () => {
-        const valueToSend = 'resetpw';
-        if (callbackFunction !== undefined) {
-            callbackFunction(valueToSend);
-        } else {
-            // 处理函数未定义的情况
-        }
-    };
-
+export const FormCard = ({ className, formType = 'signin', children}: FormCardProps) => {
+  
 
     const linkresetpw =
         formType === 'signin' ? (
-            <a onClick={handleClickResetpw}> Forgot my password </a>
+            <Link to="/resetpw"> Forgot my password </Link>
         ) : (
             <span />
         );
@@ -69,9 +43,9 @@ export const FormCard = ({ className, formType = 'signin', children, callbackFun
 
     const linksign =
         formType === 'signin' ? (
-            <a onClick={handleClickSignup}> Sign Up </a>
+             <Link to="/signup"> Sign Up </Link>
         ) : (formType === 'signup' || formType === 'resetpw') ? (
-            <a onClick={handleClickSignin}> Sign In </a>
+            <Link to="/signin"> Sign In </Link>
         ) : (
             <span />
         );

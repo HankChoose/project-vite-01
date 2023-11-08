@@ -1,4 +1,5 @@
 import { createBoard } from '@wixc3/react-board';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { UserApplyArea } from '../../../components/user-apply-area/user-apply-area';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -7,6 +8,6 @@ const store = createStore(rootReducer); // 创建 Redux store
 
 export default createBoard({
     name: 'UserApplyArea',
-    Board: () => <Provider store={store}><UserApplyArea /></Provider>,
+    Board: () =>  <Router><Provider store={store}><UserApplyArea /></Provider>  </Router>,
     isSnippet: true,
 });

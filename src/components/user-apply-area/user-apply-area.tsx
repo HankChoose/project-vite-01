@@ -13,20 +13,20 @@ export interface UserApplyAreaProps {
 function GotoPage1() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
-        navigate('/react/page1'); // 在 useEffect 中调用 navigate
+        navigate('/page1'); // 在 useEffect 中调用 navigate
     }, []); // 空数组表示只在组件挂载时调用一次
     return (
-        <div>console.log("navigate is /react/page1")</div>
+        <div></div>
     );
 }
 
 function GotoPage2() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
-        navigate('/react/page2'); // 在 useEffect 中调用 navigate
+        navigate('/page2'); // 在 useEffect 中调用 navigate
     }, []); // 空数组表示只在组件挂载时调用一次
     return (
-        <div>console.log("navigate is /react/page2")</div>
+        <div></div>
     );
 }
 
@@ -44,33 +44,29 @@ export const UserApplyArea = ({ className }: UserApplyAreaProps) => {
     };
 
     return <div className={classNames(styles.root, className)}>
-        <Router>
-            {isInternalControlClicked === "page1" ? <GotoPage1 /> : <GotoPage1 />}
-            {isInternalControlClicked === "page2" ? <GotoPage2 /> : <GotoPage1 />}
-            <div>
-                <Routes>
-                    <Route
-                        path="/react/page1"
-                        element={
-                            <UserApply
-                            callbackFunction={handleInternalControlClick}
-                            />
-                        }
+        
+        {isInternalControlClicked === "page1" ? <GotoPage1 /> : <GotoPage1 />}
+        {isInternalControlClicked === "page2" ? <GotoPage2 /> : <GotoPage1 />}
+        
+        <Routes>
+            <Route
+                path="/page1/*"
+                element={
+                    <UserApply
+                    callbackFunction={handleInternalControlClick}
                     />
-                    <Route
-                        path="/react/page2"
-                        element={
-                            <UserApply2 
-                            callbackFunction={handleInternalControlClick} 
-                        />
-                            
-                        }
-                    />
-
-                </Routes>
-            </div>
-        </Router>
-       
+                }
+            />
+            <Route
+                path="/page2/*"
+                element={
+                    <UserApply2 
+                    callbackFunction={handleInternalControlClick} 
+                />
+                    
+                }
+            />
+        </Routes>
 
     </div>;
 };

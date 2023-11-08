@@ -12,7 +12,7 @@ export interface SignAreaProps {
 function GotoSignup() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
-        navigate('/react/signup'); // 在 useEffect 中调用 navigate
+        navigate('/signup'); // 在 useEffect 中调用 navigate
     }, []); // 空数组表示只在组件挂载时调用一次
     return (
     <div></div>
@@ -22,7 +22,7 @@ function GotoSignup() {
 function GotoSignin() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
-        navigate('/react/signin'); // 在 useEffect 中调用 navigate
+        navigate('/signin'); // 在 useEffect 中调用 navigate
     }, []); // 空数组表示只在组件挂载时调用一次
     return (
      <div></div>
@@ -32,7 +32,7 @@ function GotoSignin() {
 function GotoResetpw() {
     const navigate = useNavigate(); // 在<Router>组件内使用useNavigate
     React.useEffect(() => {
-        navigate('/react/resetpw'); // 在 useEffect 中调用 navigate
+        navigate('/resetpw'); // 在 useEffect 中调用 navigate
     }, []); // 空数组表示只在组件挂载时调用一次
     return (
     <div></div>
@@ -49,14 +49,14 @@ export const SignArea = ({ className }: SignAreaProps) => {
 
     return <div className={classNames(styles.root, className)}>
        
-        <Router>
+     
             {isInternalControlClicked === "signup" ? <GotoSignup /> : <GotoSignin />}
-            {isInternalControlClicked === "signin" ? <GotoSignin /> : null}
+            {isInternalControlClicked === "signin" ? <GotoSignin /> : <GotoSignin />}
             {isInternalControlClicked === "resetpw" ? <GotoResetpw /> : <GotoSignin />}
             <div>
                 <Routes>
                     <Route
-                        path="/react/signin"
+                        path="/signin"
                         element={
                             <FormCard
                                 formType="signin"
@@ -65,7 +65,7 @@ export const SignArea = ({ className }: SignAreaProps) => {
                         }
                     />
                     <Route
-                        path="/react/signup"
+                        path="/signup"
                         element={
                             <FormCard
                                 formType="signup"
@@ -75,7 +75,7 @@ export const SignArea = ({ className }: SignAreaProps) => {
                     />
 
                     <Route
-                    path="/react/resetpw"
+                    path="/resetpw"
                     element={
                             <FormCard
                                 formType="resetpw"
@@ -86,7 +86,6 @@ export const SignArea = ({ className }: SignAreaProps) => {
                 
                 </Routes>
             </div>
-        </Router>
     
     </div>;
 };
