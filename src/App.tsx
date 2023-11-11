@@ -23,28 +23,28 @@ const store = createStore(rootReducer);
 function App() {
 
     return (
-
+       
         <div className={styles.App}>
-
+        
             <Router>
-                <Link to="userapply"> UserApply </Link>
-                <Link to="signin"> SignIn </Link>
+                <Link to="/react/userapply"> U </Link>
+                <Link to="/react/signin"> S </Link>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="userapply" element={<Provider store={store}><UserApply /></Provider>} />
-                    <Route path="userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
-                    <Route path="signin" element={<FormCard formType="signin" />} />
-                    <Route path="signup" element={<FormCard formType="signup" />} />
-                    <Route path="resetpw" element={<FormCard formType="resetpw" />} />
-                    <Route path="page1" element={<Page1 />}>
+                    <Route path="/react" element={<Home />} />
+                    <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
+                    <Route path="/react/userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
+                    <Route path="/react/signin" element={<FormCard formType="signin" />} />
+                    <Route path="/react/signup" element={<FormCard formType="signup" />} />
+                    <Route path="/react/resetpw" element={<FormCard formType="resetpw" />} />
+                    <Route path="/react/page1" element={<Page1 />}>
                         <Route path="test1" element={<Test1 />} />
                         <Route path="test2" element={<Test2 />} />
                     </Route>
-                    <Route path="page2" element={<Page2 />}>
+                    <Route path="/react/page2" element={<Page2 />}>
                         <Route path="test3" element={<Test3 />} />
                         <Route path="test4" element={<Test4 />} />
                     </Route>
-                 
+
                 </Routes>
 
             </Router>

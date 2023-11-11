@@ -13,8 +13,8 @@ export const Page1 = ({ className }: Page1Props) => {
 
     return <div className={classNames(styles.root, className)}>
         <h1>Component-page1</h1>
-        <Link to="/page2">Page2</Link>
-       
+        <Link to="/react/page1/test1">Test1</Link>
+        <Link to="/react/page1/test2">Test2</Link>
         <Outlet />
     </div>;
 };

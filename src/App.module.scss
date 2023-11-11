@@ -1,6 +1,4 @@
 .App {
-    max-width: 1280px;
-    margin: 20px;
     padding: 2rem;
     text-align: start;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
@@ -12,6 +10,7 @@
     justify-items: center;
     border: 0px solid black;
     border-radius: 0.8em;
+    height: 400px;
 }
 
 .logo {

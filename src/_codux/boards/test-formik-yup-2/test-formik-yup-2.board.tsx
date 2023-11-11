@@ -1,12 +1,12 @@
 import { createBoard } from '@wixc3/react-board';
-import { FormCard } from '../../../components/form-card/form-card';
+import { TestFormikYup2 } from '../../../components/test-formik-yup-2/test-formik-yup-2';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 export default createBoard({
-    name: 'Resetpw',
-    Board: () => <Router><FormCard formType="resetpw" /></Router>,
+    name: 'TestFormikYup2',
+    Board: () =>  <Router><TestFormikYup2 /> </Router>,
     isSnippet: true,
     environmentProps: {
-        canvasWidth: 370
+        windowWidth: 1152
     }
 });
