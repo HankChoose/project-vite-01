@@ -8,9 +8,9 @@ const store = createStore(rootReducer); // 创建 Redux store
 
 export default createBoard({
     name: 'UserApply',
-    Board: () =>  <Provider store={store}><Router><UserApply /></Router></Provider>,
+    Board: () => <Provider store={store}><Router><UserApply /></Router></Provider>,
     isSnippet: true,
     environmentProps: {
-        canvasHeight: 36
+        canvasHeight: 490
     }
 });

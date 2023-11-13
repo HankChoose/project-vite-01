@@ -52,7 +52,7 @@ export const UserApply2 = ({ className}: UserApply2Props) => {
         console.log("userInfo:",userInfo);
         console.log("userInfo2:",userInfo2);
         console.log("userInfoArray:",userInfoArray);
-        axios.post("/api/submit", userInfoArray)
+        axios.post("/create", userInfoArray)
         .then(response => {
         // 处理成功响应
         })
@@ -63,12 +63,23 @@ export const UserApply2 = ({ className}: UserApply2Props) => {
 
     
     return <div className={classNames(styles.root, className)}>
-        <div>
-            <select value={userInfo2.applytype} onChange={handleApplytypeChange}><option>Apple</option><option>Banana</option><option>Watermelon</option></select>
-            <input type="text" placeholder="Requirements" value={userInfo2.requirements} onChange={handleRequirementsChange} />
-            <Link to="/react/userapply">Previous page</Link>
-            <a href="https://zhiyouyuec.com">Home</a>   
-           <button onClick={handleSubmission}>Submit</button>
+        <div className={styles.FromArea}>
+            <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
+            <div className={classNames(styles.FormRow)}> </div>
+            <div className={classNames(styles.FormRow)}> </div>
+             <div className={classNames(styles.FormRow)}>
+                <select value={userInfo2.applytype} className={classNames(styles.Input)} onChange={handleApplytypeChange}><option>Apple</option><option>Banana</option><option>Watermelon</option></select>
+            </div>
+            <div className={classNames(styles.FormRow)}> </div>
+            <div className={classNames(styles.FormRow)}>
+                <input type="text" className={classNames(styles.Input)} placeholder="Requirements" value={userInfo2.requirements} onChange={handleRequirementsChange} />
+            </div>
+            <div className={classNames(styles.FormRow)}> </div>
+             <div className={classNames(styles.FormRow)}>
+               <Link to="/react/userapply">Previous page</Link>
+                <button onClick={handleSubmission}>Submit</button>
+            </div>         
+          
         </div>
 
     </div>;

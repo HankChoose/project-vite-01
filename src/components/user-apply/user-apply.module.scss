@@ -1,2 +1,68 @@
 .root {
+    padding: 2rem;
+    text-align: start;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+    width: 600px;
+    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    border-radius: 0.8em;
+    height: 430px;
+    margin: 0px;
 }
+
+
+.FormRow {
+    border: 0px solid black;
+    display: flex;
+    height: 35px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+}
+
+.FormRowSmall {
+    border: 0px solid black;
+    display: flex;
+    height: 25px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+}
+
+
+.FromArea {
+
+    text-align: center;
+    align-items: center;
+    border: 0px solid black;
+    position: fixed;
+    top: 4em;
+    width: 300px;
+
+}
+
+
+.Input {
+    padding: 0.6em 0.8em;
+    margin: 0em;
+    width: 300px;
+    min-width: auto;
+    border-radius: 0.2em;
+
+    &:focus {
+        border: 1px solid #2a85ff;
+        outline: unset;
+        box-shadow: 0 0 6px #2a85ff;
+    }
+
+    border: 1px solid black;
+    text-align: start;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    overflow: visible;
+}
+
