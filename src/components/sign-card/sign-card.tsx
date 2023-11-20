@@ -5,6 +5,8 @@ import * as Yup from 'yup';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 export interface SignCardProps {
     className?: string;
@@ -41,24 +43,78 @@ const validationSchemaResetpw = Yup.object().shape({
 
 });
 
+const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token
 
 const handleSignIn = (values: FormikValues) => {
     // Logic for handling sign-in form submission
     console.log('Handling sign-in form submission:', values);
     // Add code to submit data for sign-in
+    //axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+    const userData = {
+      username: values.email,
+      password: values.password,
+      // 添加要发送给Django的数据
+    };
+    console.log('Handling sign-in form userData:', userData);
+    axios.post("/accounts/login/", userData)
+    .then(response => {
+        // 处理成功响应
+        console.log('成功',response.data);
+    })
+    .catch(error => {
+        // 处理错误
+         console.error('失败', error);
+    });
 };
 
 const handleSignUp = (values: FormikValues) => {
     // Logic for handling sign-up form submission
     console.log('Handling sign-up form submission:', values);
     // Add code to submit data for sign-up
+  
+    const csrftoken = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='))?.split('=')[1];
+    // Set the CSRF token in the headers of the Axios request
+    const userData = {
+      username: values.email,
+      password: values.password,
+      password2: values.password,
+      // 添加要发送给Django的数据
+    };
+    console.log('Handling sign-up form userData:', userData);
+    try {
+      // 设置CSRF令牌作为请求头
+      const config = {
+        headers: {
+          'X-CSRFToken': csrfToken, // 你的CSRF令牌的名称可能不同
+          'Referer': 'https://zhiyouyuec.com'
+        },
+      };
+      axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+      const response = axios.post('/accounts/signup/', userData,config);
+      console.log('Response from Django:');
+    } catch (error) {
+      //console.error(error);
+      console.error('Error sending data to Django:', error);
+    }
 };
 
 const handleResetPassword = (values: FormikValues) => {
     // Logic for handling reset password form submission
     console.log('Handling reset password form submission:', values);
     // Add code to submit data for reset password
+    //axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+    axios.post("/accounts/password/change/", values)
+    .then(response => {
+        // 处理成功响应
+        console.log('成功',response.data);
+    })
+    .catch(error => {
+        // 处理错误
+        console.error('失败', error);
+    });
 };
+
+
 /**
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522

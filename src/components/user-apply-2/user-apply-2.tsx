@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateApplytype, updateRequirements } from "../../actions/userInfo2Actions";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export interface UserApply2Props {
     className?: string;
@@ -24,6 +25,8 @@ type RootState2 = {
     };
 };
 
+
+
 /**
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
@@ -37,6 +40,7 @@ export const UserApply2 = ({ className}: UserApply2Props) => {
     console.log("userInfo2-1:",userInfo2);
     console.log("userInfoArray-1:",userInfoArray);
     const dispatch = useDispatch();
+   
 
     const handleApplytypeChange = (e: ChangeEvent<HTMLSelectElement>) => {
         dispatch(updateApplytype(e.target.value));
@@ -49,10 +53,15 @@ export const UserApply2 = ({ className}: UserApply2Props) => {
     };
 
     const handleSubmission = () => {
+        const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token
         console.log("userInfo:",userInfo);
         console.log("userInfo2:",userInfo2);
         console.log("userInfoArray:",userInfoArray);
-        axios.post("/create", userInfoArray)
+        //axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
+        const csrftoken = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='))?.split('=')[1];
+        // Set the CSRF token in the headers of the Axios request
+        axios.defaults.headers.common['X-CSRFToken'] = csrftoken;
+        axios.post("/create/", userInfoArray)
         .then(response => {
         // 处理成功响应
         })
