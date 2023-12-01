@@ -20,6 +20,9 @@ import { TestCheckEmail } from './components/test-check-email/test-check-email';
 import { TestCheckEmail2 } from './components/test-check-email-2/test-check-email-2';
 import { TestAxiosPost } from './components/test-axios-post/test-axios-post';
 import { TestAxiosPost2 } from './components/test-axios-post-2/test-axios-post-2';
+import { TestAxiosPost3 } from './components/test-axios-post-3/test-axios-post-3';
+import { UserProfile } from './components/user-profile/user-profile';
+import { TestToken } from './components/test-token/test-token';
 
 // 导入根 reducer
 const store = createStore(rootReducer);
@@ -37,6 +40,10 @@ function App() {
                 <Link to="/react/checkemail2"> E2 </Link>
                 <Link to="/react/testaxiospost"> TA </Link>
                 <Link to="/react/testaxiospost2"> TA2 </Link>
+                <Link to="/react/testaxiospost3"> TA3 </Link>
+                <Link to="/react/testtoken"> TT </Link>
+                <Link to="/react/userprofile"> UP </Link>
+
                 <Routes>
                     <Route path="/react" element={<Home />} />
                     <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
@@ -48,6 +55,9 @@ function App() {
                     <Route path="/react/checkemail2" element={<TestCheckEmail2 />} />
                     <Route path="/react/testaxiospost" element={<TestAxiosPost />} />
                     <Route path="/react/testaxiospost2" element={<TestAxiosPost2 />} />
+                    <Route path="/react/testaxiospost3" element={<TestAxiosPost3 />} />
+                    <Route path="/react/testtoken" element={ <TestToken />} />
+                    <Route path="/react/userprofile" element={<UserProfile />} />
                     <Route path="/react/page1" element={<Page1 />}>
                         <Route path="test1" element={<Test1 />} />
                         <Route path="test2" element={<Test2 />} />
@@ -61,6 +71,9 @@ function App() {
 
 
             </Router>
+          
+
+
 
         </div>
     );
