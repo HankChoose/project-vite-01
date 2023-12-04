@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import styles from './App.module.scss';
+
 import { UserApplyArea } from './components/user-apply-area/user-apply-area';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { Home } from './components/home/home';
@@ -23,6 +24,9 @@ import { TestAxiosPost2 } from './components/test-axios-post-2/test-axios-post-2
 import { TestAxiosPost3 } from './components/test-axios-post-3/test-axios-post-3';
 import { UserProfile } from './components/user-profile/user-profile';
 import { TestToken } from './components/test-token/test-token';
+import { TestList } from './components/test-list/test-list';
+import { UserApplyContent } from './components/user-apply-content/user-apply-content';
+import { TestListSearch } from './components/test-list-search/test-list-search';
 
 // 导入根 reducer
 const store = createStore(rootReducer);
@@ -32,7 +36,6 @@ function App() {
     return (
 
         <div className={styles.App}>
-
             <Router>
                 <Link to="/react/userapply"> U </Link>
                 <Link to="/react/signin"> S </Link>
@@ -42,6 +45,7 @@ function App() {
                 <Link to="/react/testaxiospost2"> TA2 </Link>
                 <Link to="/react/testaxiospost3"> TA3 </Link>
                 <Link to="/react/testtoken"> TT </Link>
+                <Link to="/react/testlist"> UP </Link>
                 <Link to="/react/userprofile"> UP </Link>
 
                 <Routes>
@@ -56,8 +60,11 @@ function App() {
                     <Route path="/react/testaxiospost" element={<TestAxiosPost />} />
                     <Route path="/react/testaxiospost2" element={<TestAxiosPost2 />} />
                     <Route path="/react/testaxiospost3" element={<TestAxiosPost3 />} />
-                    <Route path="/react/testtoken" element={ <TestToken />} />
+                    <Route path="/react/testtoken" element={<TestToken />} />
+                    <Route path="/react/testlist" element={<TestList />} />
                     <Route path="/react/userprofile" element={<UserProfile />} />
+                    <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
+                    <Route path="/react/testlistsearch" element={ <TestListSearch />} />
                     <Route path="/react/page1" element={<Page1 />}>
                         <Route path="test1" element={<Test1 />} />
                         <Route path="test2" element={<Test2 />} />
@@ -66,17 +73,13 @@ function App() {
                         <Route path="test3" element={<Test3 />} />
                         <Route path="test4" element={<Test4 />} />
                     </Route>
-
                 </Routes>
-
-
             </Router>
-          
-
-
+           
 
         </div>
     );
+
 }
 
 export default App;

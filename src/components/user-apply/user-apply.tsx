@@ -4,6 +4,8 @@ import React, { useRef, useState, Component } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { updateName, updateEmail } from "../../actions/userInfoActions";
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import {baseUrl} from '../../constants';
+
 export interface UserApplyProps {
     className?: string;
     callbackFunction?: (data: string) => void; // 定义回调函数类型
@@ -42,7 +44,7 @@ export const UserApply = ({ className }: UserApplyProps) => {
     return <div className={classNames(styles.root, className)}>
        
         <div className={styles.FromArea}>
-            <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
+            <div className={classNames(styles.FormRow)}>  <a href={baseUrl}>Home</a></div>
             <div className={classNames(styles.FormRow)}> </div>
             <div className={classNames(styles.FormRow)}> </div>
             <div className={classNames(styles.FormRow)}>

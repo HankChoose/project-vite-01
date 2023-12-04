@@ -1,9 +1,9 @@
 import { createBoard } from '@wixc3/react-board';
-import { TestList } from '../../../components/test-list/test-list';
+import TestListClass from '../../../components/test-list-class/test-list-class';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 
 export default createBoard({
-    name: 'TestList',
-    Board: () =><Router>  <TestList /></Router> ,
+    name: 'TestListClass',
+    Board: () => <Router>  <TestListClass /></Router>  ,
     isSnippet: true,
 });

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import styles from './test-check-email.module.scss';
 import React, { useState } from 'react';
 import axios from 'axios';
+import {baseUrl} from '../../constants';
 
 export interface TestCheckEmailProps {
     className?: string;
@@ -30,7 +31,7 @@ export const TestCheckEmail = ({ className }: TestCheckEmailProps) => {
         }
     };
     return <div className={classNames(styles.root, className)}>
-        <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
+        <div className={classNames(styles.FormRow)}> <a href={baseUrl}>Home</a></div>
          <input
             type="text"
             placeholder="Enter email"

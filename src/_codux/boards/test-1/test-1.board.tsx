@@ -5,4 +5,7 @@ export default createBoard({
     name: 'Test1',
     Board: () => <Test1 />,
     isSnippet: true,
+    environmentProps: {
+        canvasWidth: 42
+    }
 });

@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import styles from './user-profile.module.scss';
 import axios from 'axios';
 import React, { useState ,useEffect} from 'react';
+import {baseUrl} from '../../constants';
 
 export interface UserProfileProps {
     className?: string;
@@ -24,10 +25,10 @@ export const UserProfile = ({ className }: UserProfileProps) => {
     const fetchData = async () => {
         // 获取保存在本地存储中的令牌
         const token = localStorage.getItem('accessToken');
-
+        const apiUrl = `${baseUrl}/user-profile/`;
         if (token) {
             try {
-                const response = await fetch('https://zhiyouyuec.com/user-profile/', {
+                const response = await fetch(apiUrl, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${token}`,  // 注意这里的格式，应为 `Token ${token}`

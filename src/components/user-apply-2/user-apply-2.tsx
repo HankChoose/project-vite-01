@@ -6,6 +6,7 @@ import { updateApplytype, updateRequirements } from "../../actions/userInfo2Acti
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {baseUrl} from '../../constants';
 
 export interface UserApply2Props {
     className?: string;
@@ -73,7 +74,7 @@ export const UserApply2 = ({ className}: UserApply2Props) => {
     
     return <div className={classNames(styles.root, className)}>
         <div className={styles.FromArea}>
-            <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
+            <div className={classNames(styles.FormRow)}>  <a href={baseUrl}>Home</a></div>
             <div className={classNames(styles.FormRow)}> </div>
             <div className={classNames(styles.FormRow)}> </div>
              <div className={classNames(styles.FormRow)}>

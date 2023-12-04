@@ -4,6 +4,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import {baseUrl} from '../../constants';
 
 export interface TestCheckEmail2Props {
     className?: string;
@@ -35,7 +36,7 @@ export const TestCheckEmail2 = ({ className }: TestCheckEmail2Props) => {
         },
     });
     return <div className={classNames(styles.root, className)}>
-    <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
+    <div className={classNames(styles.FormRow)}> <a href={baseUrl}>Home</a></div>
             <form onSubmit={formik.handleSubmit}>
             <label htmlFor="email">邮箱地址:</label>
             <input
