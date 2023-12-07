@@ -23,6 +23,18 @@
                 "exportName": "RxEyeClosed",
                 "name": "RxEyeClosed"
             }
+			,
+            {
+                "filePath": "react-icons/fc",
+                "exportName": "FcUp",
+                "name": "FcUp"
+            }
+			,
+			{
+                "filePath": "react-icons/fc",
+                "exportName": "FcDown",
+                "name": "FcDown"
+            }
         ]
     }
 ]  

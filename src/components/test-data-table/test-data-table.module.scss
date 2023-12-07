@@ -1,2 +1,37 @@
 .root {
+  padding: 4rem;
+  text-align: start;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+  width: 1200px;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  border-radius: 0.8em;
+  height: 600px;
+  margin: 0px;
+   
+}
+
+
+.TableArea {
+
+  text-align: center;
+  align-items: center;
+  border: 0px solid black;
+  position: fixed;
+  top: 4em;
+  width: 800px;
+
+}
+
+
+.handpoint {
+    cursor: pointer;
+    background-color: #3498db;
+
+}
+
+.tableheader {
+  background-color: #3498db; /* 设置表头背景颜色为蓝色 */
 }

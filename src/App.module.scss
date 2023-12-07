@@ -1,6 +1,41 @@
-.App {
-   
+.AppTop {
+
+    padding: 2rem;
+    text-align: start;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+    width: 100vw;
+    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    justify-items: center;
+    border-radius: 0.8em;
+    height: 20px;
+    margin: 0px;
+
 }
+
+.App {
+    padding: 2rem;
+    text-align: start;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+    width: 600px;
+    display: block;
+    justify-items: center;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.8em;
+    height: 100vh;
+    margin: 0px;
+    position: fixed;
+    left: 100px;
+
+
+}
+
+.AppBottom {}
+
+
 
 .logo {
     padding: 1.25em;

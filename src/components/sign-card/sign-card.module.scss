@@ -13,6 +13,17 @@
     margin: 0px;
 }
 
+.FromArea {
+
+    text-align: center;
+    align-items: center;
+    border: 0px solid black;
+    position: fixed;
+    top: 4em;
+    width: 300px;
+
+}
+
 .FormRow {
     border: 0px solid black;
     display: flex;
@@ -120,15 +131,4 @@
     }
 
     color: #ffffff;
-}
-
-.FromArea {
-
-    text-align: center;
-    align-items: center;
-    border: 0px solid black;
-    position: fixed;
-    top: 4em;
-    width: 300px;
-
 }

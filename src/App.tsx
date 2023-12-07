@@ -26,57 +26,61 @@ import { UserProfile } from './components/user-profile/user-profile';
 import { TestToken } from './components/test-token/test-token';
 import { TestList } from './components/test-list/test-list';
 import { UserApplyContent } from './components/user-apply-content/user-apply-content';
-import { TestListSearch } from './components/test-list-search/test-list-search';
-
+import { TestListDataTable } from './components/test-list-data-table/test-list-data-table';
+import { TopBar } from './components/top-bar/top-bar';
+//import { TopbarProvider } from './TopbarContext';
 // 导入根 reducer
 const store = createStore(rootReducer);
 
 function App() {
 
     return (
+        
+        <div>
+            <div className={styles.AppTop}>
+            <TopBar />
+            </div>
+            <div className={styles.App}>
+                <Router>
+                    <Link to="/react/userapply"> U </Link>
+                    <Link to="/react/signin"> S </Link>
+                    <Link to="/react/checkemail"> E1 </Link>
+                    <Link to="/react/checkemail2"> E2 </Link>
+                    <Link to="/react/testaxiospost"> TA </Link>
+                    <Link to="/react/testaxiospost2"> TA2 </Link>
+                    <Link to="/react/testaxiospost3"> TA3 </Link>
+                    <Link to="/react/testtoken"> TT </Link>
+                    <Link to="/react/testlist"> UP </Link>
+                    <Link to="/react/userprofile"> UP </Link>
 
-        <div className={styles.App}>
-            <Router>
-                <Link to="/react/userapply"> U </Link>
-                <Link to="/react/signin"> S </Link>
-                <Link to="/react/checkemail"> E1 </Link>
-                <Link to="/react/checkemail2"> E2 </Link>
-                <Link to="/react/testaxiospost"> TA </Link>
-                <Link to="/react/testaxiospost2"> TA2 </Link>
-                <Link to="/react/testaxiospost3"> TA3 </Link>
-                <Link to="/react/testtoken"> TT </Link>
-                <Link to="/react/testlist"> UP </Link>
-                <Link to="/react/userprofile"> UP </Link>
-
-                <Routes>
-                    <Route path="/react" element={<Home />} />
-                    <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
-                    <Route path="/react/userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
-                    <Route path="/react/signin" element={<SignCard formType="signin" />} />
-                    <Route path="/react/signup" element={<SignCard formType="signup" />} />
-                    <Route path="/react/resetpw" element={<SignCard formType="resetpw" />} />
-                    <Route path="/react/checkemail" element={<TestCheckEmail />} />
-                    <Route path="/react/checkemail2" element={<TestCheckEmail2 />} />
-                    <Route path="/react/testaxiospost" element={<TestAxiosPost />} />
-                    <Route path="/react/testaxiospost2" element={<TestAxiosPost2 />} />
-                    <Route path="/react/testaxiospost3" element={<TestAxiosPost3 />} />
-                    <Route path="/react/testtoken" element={<TestToken />} />
-                    <Route path="/react/testlist" element={<TestList />} />
-                    <Route path="/react/userprofile" element={<UserProfile />} />
-                    <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
-                    <Route path="/react/testlistsearch" element={ <TestListSearch />} />
-                    <Route path="/react/page1" element={<Page1 />}>
-                        <Route path="test1" element={<Test1 />} />
-                        <Route path="test2" element={<Test2 />} />
-                    </Route>
-                    <Route path="/react/page2" element={<Page2 />}>
-                        <Route path="test3" element={<Test3 />} />
-                        <Route path="test4" element={<Test4 />} />
-                    </Route>
-                </Routes>
-            </Router>
-           
-
+                    <Routes>
+                        <Route path="/react" element={<Home />} />
+                        <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
+                        <Route path="/react/userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
+                        <Route path="/react/signin" element={<SignCard formType="signin" />} />
+                        <Route path="/react/signup" element={<SignCard formType="signup" />} />
+                        <Route path="/react/resetpw" element={<SignCard formType="resetpw" />} />
+                        <Route path="/react/checkemail" element={<TestCheckEmail />} />
+                        <Route path="/react/checkemail2" element={<TestCheckEmail2 />} />
+                        <Route path="/react/testaxiospost" element={<TestAxiosPost />} />
+                        <Route path="/react/testaxiospost2" element={<TestAxiosPost2 />} />
+                        <Route path="/react/testaxiospost3" element={<TestAxiosPost3 />} />
+                        <Route path="/react/testtoken" element={<TestToken />} />
+                        <Route path="/react/testlist" element={<TestList />} />
+                        <Route path="/react/userprofile" element={<UserProfile />} />
+                        <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
+                        <Route path="/react/testlisdatatable" element={<TestListDataTable />} />
+                        <Route path="/react/page1" element={<Page1 />}>
+                            <Route path="test1" element={<Test1 />} />
+                            <Route path="test2" element={<Test2 />} />
+                        </Route>
+                        <Route path="/react/page2" element={<Page2 />}>
+                            <Route path="test3" element={<Test3 />} />
+                            <Route path="test4" element={<Test4 />} />
+                        </Route>
+                    </Routes>
+                </Router>
+            </div>
         </div>
     );
 
