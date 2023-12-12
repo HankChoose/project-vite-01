@@ -28,6 +28,10 @@ import { TestList } from './components/test-list/test-list';
 import { UserApplyContent } from './components/user-apply-content/user-apply-content';
 import { TestListDataTable } from './components/test-list-data-table/test-list-data-table';
 import { TopBar } from './components/top-bar/top-bar';
+import { UserApply3 } from './components/user-apply-3/user-apply-3';
+import { TestLink } from './components/test-link/test-link';
+import { TestNavigate } from './components/test-navigate/test-navigate';
+import { UserApply4 } from './components/user-apply-4/user-apply-4';
 //import { TopbarProvider } from './TopbarContext';
 // 导入根 reducer
 const store = createStore(rootReducer);
@@ -35,28 +39,18 @@ const store = createStore(rootReducer);
 function App() {
 
     return (
-        
-        <div>
-            <div className={styles.AppTop}>
-            <TopBar />
-            </div>
-            <div className={styles.App}>
-                <Router>
-                    <Link to="/react/userapply"> U </Link>
-                    <Link to="/react/signin"> S </Link>
-                    <Link to="/react/checkemail"> E1 </Link>
-                    <Link to="/react/checkemail2"> E2 </Link>
-                    <Link to="/react/testaxiospost"> TA </Link>
-                    <Link to="/react/testaxiospost2"> TA2 </Link>
-                    <Link to="/react/testaxiospost3"> TA3 </Link>
-                    <Link to="/react/testtoken"> TT </Link>
-                    <Link to="/react/testlist"> UP </Link>
-                    <Link to="/react/userprofile"> UP </Link>
-
+        <div className={styles.root}>
+            <Router>
+                <div className={styles.AppTop}>
+                    <TopBar />
+                </div>
+                <div className={styles.App}>
                     <Routes>
                         <Route path="/react" element={<Home />} />
                         <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
                         <Route path="/react/userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
+                        <Route path="/react/userapply3" element={<Provider store={store}><UserApply3 /></Provider>} />
+                        <Route path="/react/userapply4" element={<UserApply4 />} />
                         <Route path="/react/signin" element={<SignCard formType="signin" />} />
                         <Route path="/react/signup" element={<SignCard formType="signup" />} />
                         <Route path="/react/resetpw" element={<SignCard formType="resetpw" />} />
@@ -67,9 +61,11 @@ function App() {
                         <Route path="/react/testaxiospost3" element={<TestAxiosPost3 />} />
                         <Route path="/react/testtoken" element={<TestToken />} />
                         <Route path="/react/testlist" element={<TestList />} />
+                        <Route path="/react/testlink" element={<TestLink />} />
                         <Route path="/react/userprofile" element={<UserProfile />} />
                         <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
                         <Route path="/react/testlisdatatable" element={<TestListDataTable />} />
+                        <Route path="/react/testnavigate" element={<TestNavigate />} />
                         <Route path="/react/page1" element={<Page1 />}>
                             <Route path="test1" element={<Test1 />} />
                             <Route path="test2" element={<Test2 />} />
@@ -79,9 +75,14 @@ function App() {
                             <Route path="test4" element={<Test4 />} />
                         </Route>
                     </Routes>
-                </Router>
-            </div>
+
+                </div>
+              
+            </Router>
+
+
         </div>
+
     );
 
 }

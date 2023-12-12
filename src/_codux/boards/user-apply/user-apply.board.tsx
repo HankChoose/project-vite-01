@@ -11,6 +11,9 @@ export default createBoard({
     Board: () => <Provider store={store}><Router><UserApply /></Router></Provider>,
     isSnippet: true,
     environmentProps: {
-        canvasHeight: 490
+        canvasHeight: 946,
+        windowWidth: 1328,
+        canvasWidth: 768,
+        windowHeight: 378
     }
 });

@@ -16,6 +16,7 @@ export interface TestAxiosPost3Props {
 
 
 export const TestAxiosPost3 = ({ className }: TestAxiosPost3Props) => {
+    
     const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token
     const config = {
        headers: {

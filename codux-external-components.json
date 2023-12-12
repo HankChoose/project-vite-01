@@ -31,9 +31,27 @@
             }
 			,
 			{
-                "filePath": "react-icons/fc",
-                "exportName": "FcDown",
-                "name": "FcDown"
+                "filePath": "react-icons/bs",
+                "exportName": "BsHouseDoor",
+                "name": "BsHouseDoor"
+            }
+             ,
+            {
+                "filePath": "react-icons/bs",
+                "exportName": "BsHouseFill",
+                "name": "BsHouseFill"
+            }
+            ,
+			{
+                "filePath": "react-icons/bs",
+                "exportName": "BsPerson",
+                "name": "BsPerson"
+            }
+            ,
+			{
+                "filePath": "react-icons/bs",
+                "exportName": "BsPersonFill",
+                "name": "BsPersonFill"
             }
         ]
     }

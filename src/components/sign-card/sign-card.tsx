@@ -191,8 +191,6 @@ export const SignCard = ({ className, formType = 'signin' }: SignCardProps) => {
         <div className={classNames(styles.root)}>
             <div className={styles.FromArea}>
                 <form onSubmit={formik.handleSubmit}>
-                    <div className={classNames(styles.FormRow)}> <a href="https://zhiyouyuec.com">Home</a></div>
-                    <div className={classNames(styles.FormRowSmall)}> </div>
                     <div className={classNames(styles.FormRow)}><h1> {titlecard}</h1></div>
                     <div className={classNames(styles.FormRowSmall)}> </div>
                     <div className={classNames(styles.FormRow)}>{linkheader}{linksign}</div>
@@ -274,6 +272,7 @@ export const SignCard = ({ className, formType = 'signin' }: SignCardProps) => {
                         </button>
                      </div>
                     <div className={classNames(styles.FormRowSmall)}>{linkresetpw}</div>
+                    <div className={classNames(styles.FormRowSmall)}> </div>
                 </form>
             </div>
         </div>

@@ -2,15 +2,32 @@
     padding: 2rem;
     text-align: start;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
-    width: 600px;
-    display: block;
-    display: flex;
+    width: auto;
     justify-content: center;
     align-items: center;
     justify-items: center;
     border-radius: 0.8em;
-    height: 430px;
+    height: 100vh;
     margin: 0px;
+    min-width: 700px;
+}
+
+.flowImage2 {
+    background-image: url('../../assets/self/userapply2.png');
+    /* 图片路径 */
+    height: 20vh;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    top: 1em;
+    width: auto;
+    min-width: 650px;
 }
 
 
@@ -21,6 +38,7 @@
     width: auto;
     text-align: center;
     align-items: center;
+    justify-content: space-between;
 }
 
 .FormRowSmall {

@@ -8,7 +8,6 @@ import { FromRowRight } from '../from-row-right/from-row-right';
 import { FromRowSeparate } from '../from-row-separate/from-row-separate';
 import { baseUrl } from '../../constants';
 import { FcUp, FcDown } from 'react-icons/fc';
-import { TopBar } from '../top-bar/top-bar';
 
 interface Data {
     id: string;
@@ -40,7 +39,8 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
         return (
             item.demand_description.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+            item.email.toLowerCase().includes(searchTerm.toLowerCase()) || 
+            item.demand_type.toLowerCase().includes(searchTerm.toLowerCase())
             // 添加其他属性的搜索条件...
         );
     });
@@ -104,7 +104,6 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
     return (
       
         <div className={classNames(styles.root)}>
-            <TopBar />
             <FromRowSeparate>
                 <div>
                     <input

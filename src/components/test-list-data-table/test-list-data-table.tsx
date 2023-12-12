@@ -37,7 +37,7 @@ export const TestListDataTable = ({ className }: TestListDataTableProps) => {
     const fetchData = async () => {
         // 获取保存在本地存储中的令牌
         const token = localStorage.getItem('accessToken');
-        const apiUrl = `${baseUrl}/user-demand-list/`;
+        const apiUrl = `${baseUrl}/user-demand-list2/`;
 
         if (token) {
             try {

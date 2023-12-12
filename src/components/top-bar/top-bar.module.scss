@@ -1,14 +1,103 @@
 .root {
     padding: 2rem;
     text-align: start;
-    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
     width: 100%;
-    display: block;
     display: flex;
     justify-content: space-between;
     align-items: center;
     justify-items: center;
-    border-radius: 0.8em;
+    border-radius: 0em;
     height: 20px;
     margin: 0px;
+    z-index: 1000;
+    align-content: center;
+}
+
+.logoImage {
+    background-image: url('../../assets/self/logohead.png');
+    /* 图片路径 */
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+}
+
+
+
+.logoWord {
+    background-image: url('../../assets/self/logo.png');
+    /* 图片路径 */
+    width: 80px;
+    height: 40px;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: start;
+    align-content: center;
+    position: relative;
+}
+
+.logoWord {
+    background-image: url('../../assets/self/logo.png');
+    /* 图片路径 */
+    width: 80px;
+    height: 40px;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: start;
+    align-content: center;
+    position: relative;
+}
+
+.toRow {
+    border: 0px solid black;
+    display: flex;
+    height: auto;
+    width: auto;
+    text-align: center;
+    align-items: center;
+}
+
+.toRowUser {
+    border: 0px solid black;
+    display: flex;
+    height: auto;
+    width: 400px;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+
+.loginImage {
+    background-image: url('../../assets/self/login.png');
+    /* 图片路径 */
+    width: 80px;
+    height: 40px;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: start;
+    display: block;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    position: relative;
+    margin: 0px;
+    left: 10px;
 }

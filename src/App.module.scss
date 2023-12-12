@@ -1,36 +1,56 @@
+.root {
+    z-index: 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border: 0px solid black;
+    align-items: start;
+    justify-items: center;
+    height: 100vh;
+    text-align: start;
+
+}
+
 .AppTop {
 
-    padding: 2rem;
+    padding: 2em;
     text-align: start;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
     width: 100vw;
     display: block;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     justify-items: center;
     border-radius: 0.8em;
     height: 20px;
     margin: 0px;
+    position: fixed;
+    z-index: 10;
+    /* 设置较高的 z-index 值 */
+    align-content: center;
+    border: 1px solid #DDE0D1;
 
 }
 
 .App {
-    padding: 2rem;
+    padding: 2em;
     text-align: start;
-    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
-    width: 600px;
-    display: block;
+    //box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+    width: 90%;
+    display: flex;
     justify-items: center;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 0.8em;
+    align-items: start;
     height: 100vh;
     margin: 0px;
-    position: fixed;
-    left: 100px;
-
-
+    position: relative;
+    left: auto;
+    top: 4em;
+    bottom: 100vh;
+    z-index: 1;
+    /* 设置较高的 z-index 值 */
+    justify-content: center; //content center
+    //height: 100vh; // 使容器铺满整个视口高度align-self:center;align-self:center;align-self:stretch;align-self:center;align-content:center;align-content:end;align-content:space-between;align-content:end;align-content:center;align-content:center;align-content:center;
 }
 
 .AppBottom {}
