@@ -75,10 +75,10 @@ export const UserApply3 = ({ className }: UserApply3Props) => {
         
         try {
             const response = await axios.post(apiUrl, requestData,config);
-            if (response.status === 200) {
+            if (response.status === 201) {
                 navigate('/react/userapply4'); // 在 useEffect 中调用 navigate
             } else {
-                console.error('Login failed');
+                console.error('created failed');
             }
         console.log(response.data);
         } catch (error) {

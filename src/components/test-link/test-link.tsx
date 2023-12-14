@@ -25,6 +25,7 @@ export const TestLink = ({ className }: TestLinkProps) => {
       <Link to="/react/testlist"> TL </Link>
       <Link to="/react/userprofile"> UP </Link>
       <Link to="/react/testnavigate"> TN </Link>
+      <Link to="/react/testchangepw"> TP </Link>
     
     </div>;
 };

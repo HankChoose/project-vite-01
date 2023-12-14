@@ -31,7 +31,7 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [page, setPage] = useState(1);
     const [pageSize, setPageSize] = useState(5); // 每页显示的数据量
-    const [sortOrder, setSortOrder] = useState('asc'); // 'asc' 或 'desc'
+    const [sortOrder, setSortOrder] = useState('desc'); // 'asc' 或 'desc'
     const [sortedField, setSortedField] = useState('id'); // 按照哪个字段排序
 
     // 过滤数据
@@ -47,8 +47,18 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
 
     // 排序数据
     const sortedData = [...filteredData].sort((a, b) => {
-        const compareValue = String(a[sortedField]).localeCompare(String(b[sortedField]));
+
+        if (sortedField === 'id') {
+        // 如果是 id 字段，以数字形式比较
+        const compareValue = parseInt(a[sortedField], 10)-parseInt(b[sortedField], 10);
         return sortOrder === 'asc' ? compareValue : -compareValue;
+      } else {
+        // 其他字段按字符形式比较
+         const compareValue = String(a[sortedField]).localeCompare(String(b[sortedField]));
+         return sortOrder === 'asc' ? compareValue : -compareValue;
+      }
+       
+        
     });
 
     // 分页数据

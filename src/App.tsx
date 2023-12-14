@@ -32,6 +32,7 @@ import { UserApply3 } from './components/user-apply-3/user-apply-3';
 import { TestLink } from './components/test-link/test-link';
 import { TestNavigate } from './components/test-navigate/test-navigate';
 import { UserApply4 } from './components/user-apply-4/user-apply-4';
+import { TestChangePW } from './components/test-change-pw/test-change-pw';
 //import { TopbarProvider } from './TopbarContext';
 // 导入根 reducer
 const store = createStore(rootReducer);
@@ -66,6 +67,7 @@ function App() {
                         <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
                         <Route path="/react/testlisdatatable" element={<TestListDataTable />} />
                         <Route path="/react/testnavigate" element={<TestNavigate />} />
+                        <Route path="/react/testchangepw" element={<TestChangePW />} />
                         <Route path="/react/page1" element={<Page1 />}>
                             <Route path="test1" element={<Test1 />} />
                             <Route path="test2" element={<Test2 />} />
@@ -77,8 +79,9 @@ function App() {
                     </Routes>
 
                 </div>
-              
+
             </Router>
+
 
 
         </div>
