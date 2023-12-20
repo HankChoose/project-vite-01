@@ -1,8 +1,10 @@
 import classNames from 'classnames';
 import styles from './test-axios-post-2.module.scss';
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import {baseUrl} from '../../constants';
 
 export interface TestAxiosPost2Props {
     className?: string;
@@ -28,7 +30,7 @@ export const TestAxiosPost2 = ({ className }: TestAxiosPost2Props) => {
         password2: '',
     });
 
-
+    
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -36,10 +38,29 @@ export const TestAxiosPost2 = ({ className }: TestAxiosPost2Props) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        const navigate = useNavigate();
+        const apiUrl = `${baseUrl}/accounts/signup/`;
+        const apiUrl2 = `${baseUrl}/user-token/`;
         try {
-        const response = await axios.post('/accounts/signup/', formData,config);
+        const response = await axios.post(apiUrl, formData,config);
         console.log(response.data);
+
+        if (response.status === 200) {
+                // 跳转到用户首页或执行其他登录后的逻辑
+                //history.push('/userhome');
+                console.log('Login OK',response.data);
+                const response2 = await axios.post(apiUrl2, {
+                    username: formData.email,
+                    password: formData.password1,
+                });
+                console.log('Login2 OK',response2.data);
+                localStorage.setItem('accessToken', response2.data.token);
+                console.log('response2.data.token',response2.data.token);
+                // 在这里进行你的其他操作，比如存储在本地存储中
+                navigate('/react/userprofile'); // 在 useEffect 中调用 navigate
+            } else {
+                console.error('Login failed');
+            }
         } catch (error) {
         console.error('Error creating user:', error);
         }

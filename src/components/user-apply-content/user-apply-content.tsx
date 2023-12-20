@@ -16,7 +16,7 @@ export const UserApplyContent = ({ className }: UserApplyContentProps) => {
     const apiUrl = `${baseUrl}/user-apply-content/${id}`;
 
     return <div className={classNames(styles.root, className)}>
-        <h2>User Apply Content ID: {id}</h2>
+        <h2>User Apply Content ID Hank: {id}</h2>
         <h3>apiUrl: {apiUrl}</h3>
     </div>;
 };

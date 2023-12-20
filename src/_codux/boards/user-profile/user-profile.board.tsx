@@ -7,6 +7,7 @@ export default createBoard({
     Board: () => <Router> <UserProfile /></Router>,
     isSnippet: true,
     environmentProps: {
-        canvasHeight: 5
+        canvasHeight: 5,
+        windowHeight: 598
     }
 });

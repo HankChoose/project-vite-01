@@ -26,11 +26,11 @@
     height: 20px;
     margin: 0px;
     position: fixed;
-    z-index: 10;
+    z-index: 100;
     /* 设置较高的 z-index 值 */
     align-content: center;
     border: 1px solid #DDE0D1;
-
+    background-color: rgba(138, 183, 126, 0.856); /* 不透明的红色背景 */
 }
 
 .App {

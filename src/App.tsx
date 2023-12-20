@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import styles from './App.module.scss';
 
-import { UserApplyArea } from './components/user-apply-area/user-apply-area';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { Home } from './components/home/home';
 import { Page1 } from './components/page-1/page-1';

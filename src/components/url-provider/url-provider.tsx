@@ -14,7 +14,7 @@ interface UrlContextValue {
 
 const UrlContext = createContext<UrlContextValue | undefined>(undefined);
 
-export const UrlProvider = ({ children }: UrlProviderProps) => {
+export const UrlProvider = () => {
   const [url, setUrl] = useState('https://zhiyouyuec.com');
 
   const updateUrl = (newUrl: string) => {
@@ -29,7 +29,7 @@ export const UrlProvider = ({ children }: UrlProviderProps) => {
   return (
      /*<UrlContext.Provider value={{ url, updateUrl }}>*/
     <UrlContext.Provider value={contextValue}>
-      {children}
+
       <h3>url: {url}</h3>
     </UrlContext.Provider>
     

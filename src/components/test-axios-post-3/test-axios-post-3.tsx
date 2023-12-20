@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-
+import { baseUrl } from '../../constants';
 export interface TestAxiosPost3Props {
     className?: string;
 }
@@ -17,6 +17,11 @@ export interface TestAxiosPost3Props {
 
 export const TestAxiosPost3 = ({ className }: TestAxiosPost3Props) => {
     
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
     const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token
     const config = {
        headers: {
@@ -30,21 +35,15 @@ export const TestAxiosPost3 = ({ className }: TestAxiosPost3Props) => {
         password: '',
     });
 
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
+    const apiUrl = `${baseUrl}/accounts/login/`;
+   
     const navigate = useNavigate();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('/accounts/login/', formData,config);
+            const response = await axios.post(apiUrl, formData,config);
             if (response.status === 200) {
-                
-                
                 // 跳转到用户首页或执行其他登录后的逻辑
                 //history.push('/userhome');
                 console.log('Login OK',response.data);
