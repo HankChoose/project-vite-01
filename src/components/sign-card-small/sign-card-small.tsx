@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import styles from './sign-card.module.scss';
+import styles from './sign-card-small.module.scss';
 import { useFormik, FormikValues } from 'formik';
 import * as Yup from 'yup';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
@@ -10,11 +10,12 @@ import Cookies from 'js-cookie';
 import { baseUrl } from '../../constants';
 import { useAuth } from '../../AuthContext';
 
-export interface SignCardProps {
+export interface SignCardSmallProps {
     className?: string;
     formType?: 'signin' | 'signup' | 'resetpw';
     onLogin?: (email: string, password: string) => void; // Specify void as the return type
 }
+
 
 const validationSchemaSignin = Yup.object().shape({
     email: Yup.string().email('Invalid email address')
@@ -47,13 +48,11 @@ const validationSchemaResetpw = Yup.object().shape({
 });
 
 
-
 /**
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
-export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardProps) => {
-
+export const SignCardSmall = ({ className, formType = 'signin' , onLogin}: SignCardSmallProps) => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [loginStatus, setLoginStatus] = useState<string | null>(null);
@@ -125,64 +124,7 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
     
     };
 
-    //------------------------------------------------------->handleSignUp
-    const handleSignUp =async (values: FormikValues) => {
-        // Logic for handling sign-up form submission
-        console.log('Handling sign-up form submission:', values);
-        // Add code to submit data for sign-up
-
-        const apiUrl = `${baseUrl}/accounts/signup/`;
-        const apiUrl2= `${baseUrl}/user-token/`;
-
-        // Split the email address at the "@" symbol
-        const parts = values.email.split('@');
-
-        const userData = {
-            username: parts[0],
-            email: values.email,
-            password1: values.password,
-            password2: values.password,
-            // 添加要发送给Django的数据
-        };
-        console.log('Handling sign-up form userData:', userData);
-
-        const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-CSRFToken': csrfToken, // 你的CSRF令牌的名称可能不同
-            },
-        };
     
-        try {
-            const response = await axios.post(apiUrl, userData,config);
-            if (response.status === 200) {
-                // 跳转到用户首页或执行其他登录后的逻辑
-                //history.push('/userhome');
-                console.log('Sign-up OK',response.data);
-                const response2 = await axios.post(apiUrl2, {
-                     username: userData.email,
-                     password: userData.password1,
-                });
-                console.log('Login2 OK',response2.data);
-                localStorage.setItem('accessToken', response2.data.token);
-                console.log('response2.data.token',response2.data.token);
-                // 在这里进行你的其他操作，比如存储在本地存储中
-                signIn();
-                if (onLogin) {
-                    onLogin(values.email,values.password);
-                } else {
-                    // Handle the case where onLogin is not defined, if needed
-                    console.error('onLogin is not defined');
-                }
-                navigate('/react/userprofile'); // 在 useEffect 中调用 navigate
-               
-            } else {
-                console.error('Login failed');
-            }
-        } catch (error) {
-        console.error('Error creating user:', error);
-        }
-    };
 
     //------------------------------------------------------>heckEmailExistence
     const checkEmailExistence = async (values: FormikValues) => {
@@ -239,12 +181,6 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
             const response = await axios.post(apiUrl, userData,config);
             if (response.status === 200) {
                 console.log('Password reset email sent:', response.data);
-                if (onLogin) {
-                    onLogin(values.email,values.password);
-                } else {
-                    // Handle the case where onLogin is not defined, if needed
-                    console.error('onLogin is not defined');
-                }
             } else {
                 console.error('Password reset email sent failed');
             }  
@@ -304,19 +240,6 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
         onSubmit: (values) => {
             if (formType === 'signin') {
                 handleSignIn(values);
-            } else if (formType === 'signup') {
-               
-                checkEmailExistence(values);
-                if (emailExistAfter === true) {
-                    // 邮箱存在的情况下的处理逻辑
-                    console.log('Hank:Email exists!');
-                } else {
-                    console.log('Hank:Email not exists!');
-                    handleSignUp(values);
-                    
-                } 
-            
-                    
             } else if (formType === 'resetpw') {
                 handleResetPassword(values);
             }
@@ -383,31 +306,7 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
                         </div>
                     ) : null}
 
-                    {formType === 'signup' ? (
-                        <div>
-                            <div className={classNames(styles.FormRow)}>
-                                <input
-                                    type={showPassword ? 'text' : 'password'}
-                                    id="confirmPassword"
-                                    name="confirmPassword"
-                                    placeholder="Password again"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.confirmPassword}
-                                    className={classNames(styles.Inputpw)}
-                                />
-                                <button onClick={togglePasswordVisibility} className={styles.ButtonSee}>
-                                    {showPassword ? <RxEyeClosed /> : <RxEyeOpen />}
-                                </button>
-                            </div>
-                            <div className={classNames(styles.FormRow)}>
-                                {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                    <div className={classNames(styles.ErrorsArea)}>{formik.errors.confirmPassword}</div>
-                                ) : null}
-                            </div>
-                        </div>
-                    ) : null}
-
+                    
                     <div className={classNames(styles.FormRow)}>
                         <button type="submit" className={styles.ButtonSubmit}>
                             {titlecard}

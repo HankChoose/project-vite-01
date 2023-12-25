@@ -1,5 +1,5 @@
 .root {
-    padding: 2rem;
+    padding: 1rem;
     text-align: start;
     box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
     width: auto;
@@ -12,6 +12,30 @@
     min-width: 700px;
 }
 
+
+$modal-background-color: rgba(203, 196, 223, 0.5);
+.custom-modal-overlay {
+    background-color: rgba(203, 196, 223, 0.5);
+}
+.custom-modal {
+  &__overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $modal-background-color;
+  }
+
+  &__content {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    // border: none; // 移除边框
+    // background: transparent; // 设定透明背景
+    padding: 0; // 移除默认 padding
+    border-radius: 0; // 可以根据需要设置圆角
+  }
+}
 
 .flowImage {
     background-image: url('../../assets/self/userapply1.png');

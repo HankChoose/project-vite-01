@@ -1,0 +1,143 @@
+.root {
+    padding: 2rem;
+    text-align: start;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    justify-items: center;
+    border-radius: 0.8em;
+    height: auto;
+    margin: 0px;
+    position: relative;
+    align-content: center;
+}
+
+.FromArea {
+
+    text-align: center;
+    align-items: center;
+    border: 0px solid black;
+    position: relative;
+    top: 2em;
+    width: 300px;
+
+}
+
+.ErrorsArea
+{
+    color: red;
+    text-align: left;
+    align-items: left;
+}
+
+
+.FormRow {
+    border: 0px solid black;
+    display: flex;
+    height: 35px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+}
+
+.FormRowSmall {
+    border: 0px solid black;
+    display: flex;
+    height: 25px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+}
+
+
+.Input {
+    padding: 0.6em 0.8em;
+    margin: 0em;
+    width: 300px;
+    min-width: auto;
+    border-radius: 0.2em;
+
+    &:focus {
+        border: 1px solid #2a85ff;
+        outline: unset;
+        box-shadow: 0 0 6px #2a85ff;
+    }
+
+    border: 1px solid black;
+    text-align: start;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    overflow: visible;
+}
+
+.Inputpw {
+    padding: 0.6em 0.8em;
+    margin: 0em;
+    width: 250px;
+    min-width: auto;
+    border-radius: 0.2em 0em 0em 0.2em;
+
+    &:focus {
+        border: 1px solid #2a85ff;
+        outline: unset;
+        box-shadow: 0 0 6px #2a85ff;
+    }
+
+    border: 1px solid black;
+    text-align: start;
+    display: flex;
+    justify-content: center;
+    align-content: space-around;
+    overflow: visible;
+    border-right:0px solid black;
+
+}
+
+
+.ButtonSee {
+    width: auto;
+    font-size: auto;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #c9c1c6;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 0em 0.2em 0.2em 0em;
+
+    &:hover {
+        border: 1px solid #ebe4e8;
+        outline: unset;
+        //box-shadow: 0 0 6px #ebe4e8;
+        background-color: #ebe4e8;
+    }
+
+    border-left:0px solid transparent;
+    height:auto;
+
+}
+
+
+.ButtonSubmit {
+    width: 322px;
+    font-size: auto;
+    font-weight: 400;
+    text-align: center;
+    border-radius: 3px;
+    background-color: #2d70c9;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 0.2em;
+
+    &:hover {
+        border: 1px solid #98c5e8;
+        outline: unset;
+        box-shadow: 0 0 6px #5e94da;
+        background-color: #5e94da;
+    }
+
+    color: #ffffff;
+}

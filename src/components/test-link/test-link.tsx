@@ -13,19 +13,28 @@ export interface TestLinkProps {
  */
 export const TestLink = ({ className }: TestLinkProps) => {
     return <div className={classNames(styles.root, className)}>
-    
-      <Link to="/react/userapply"> D </Link>
-      <Link to="/react/signin"> S </Link>
-      <Link to="/react/checkemail"> E1 </Link>
-      <Link to="/react/checkemail2"> E2 </Link>
-      <Link to="/react/testaxiospost"> TA </Link>
-      <Link to="/react/testaxiospost2"> TA2 </Link>
-      <Link to="/react/testaxiospost3"> TA3 </Link>
-      <Link to="/react/testtoken"> TT </Link>
-      <Link to="/react/testlist"> TL </Link>
-      <Link to="/react/userprofile"> UP </Link>
-      <Link to="/react/testnavigate"> TN </Link>
-      <Link to="/react/testchangepw"> TP </Link>
-    
+      <div>
+        <Link to="/react/signin"> signin </Link>
+      </div>
+      <div>
+        <Link to="/react/userapply"> userapply </Link>
+        <Link to="/react/userprofile"> userprofile </Link>
+      </div>
+      <div>
+        <Link to="/react/checkemail"> checkemail </Link>
+        <Link to="/react/checkemail2"> checkemail2 </Link>
+      </div>
+      <div>
+        <Link to="/react/testaxiospost"> testaxiospost </Link>
+        <Link to="/react/testaxiospost2"> testaxiospost2 </Link>
+        <Link to="/react/testaxiospost3">testaxiospost3 </Link>
+      </div>
+      <div>
+        <Link to="/react/testtoken"> testtoken </Link>
+        <Link to="/react/testlist"> testlist </Link>
+        <Link to="/react/testnavigate"> testnavigate </Link>
+        <Link to="/react/testchangepw"> testchangepw </Link>
+        <Link to="/react/testrequest"> testrequest </Link>
+      </div>
     </div>;
 };

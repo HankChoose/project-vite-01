@@ -4,16 +4,19 @@ import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import rootReducer from '../../../reducers/rootReducer'; // 导入根 reducer
+import Modal from 'react-modal';
+import { AuthProvider } from '../../../AuthContext';
+
 const store = createStore(rootReducer); // 创建 Redux store
 
 export default createBoard({
     name: 'UserApply',
-    Board: () => <Provider store={store}><Router><UserApply /></Router></Provider>,
+    Board: () => <AuthProvider><Provider store={store}><Router><UserApply /></Router></Provider></AuthProvider>,
     isSnippet: true,
     environmentProps: {
         canvasHeight: 946,
-        windowWidth: 1328,
+        windowWidth: 1318,
         canvasWidth: 768,
-        windowHeight: 378
+        windowHeight: 504
     }
 });
