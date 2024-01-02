@@ -2,16 +2,16 @@ import classNames from 'classnames';
 import styles from './user-apply.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
-import React, { useContext,useRef, useEffect, useState, Component } from 'react';
+import React, { useContext, useRef, useEffect, useState, Component } from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
-import { updateName, updateEmail } from "../../actions/userInfoActions";
+import { useSelector, useDispatch } from 'react-redux';
+import { updateName, updateEmail } from '../../actions/userInfoActions';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { baseUrl } from '../../constants';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-modal';
 import { useAuth } from '../../AuthContext';
 import { SignCard } from '../sign-card/sign-card';
+import { fetch_data_token_get, fetch_data_token_post } from '../../apiService';
 
 export interface UserApplyProps {
     className?: string;
@@ -27,14 +27,13 @@ type RootState = {
 
 const modalStyles = {
     overlay: {
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: 'rgba(203, 196, 223, 0.5)', // 背景颜色，可根据需要修改
-            zIndex: 1000, // 调整 overlay 的 z-index
-            },
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(203, 196, 223, 0.5)', // 背景颜色，可根据需要修改
+        zIndex: 1000, // 调整 overlay 的 z-index
+    },
     content: {
-    
         top: 'auto',
         left: 'auto',
         right: 'auto',
@@ -51,22 +50,49 @@ const modalStyles = {
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
 export const UserApply = ({ className }: UserApplyProps) => {
-
+    interface UserData {
+        id: string;
+        username: string;
+        email: string;
+        // 其他属性...
+    }
     const userInfo = useSelector((state: RootState) => state.userInfo);
     const dispatch = useDispatch();
+    const [userData, setUserData] = useState<UserData[]>([]);
     const { isLoggedIn, signIn, signOut } = useAuth();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const token = localStorage.getItem('accessToken');
     const navigate = useNavigate();
 
     // 在组件渲染时检查isLoggedIn状态，如果为false，则打开modal
     useEffect(() => {
         if (!isLoggedIn) {
             setIsModalOpen(true);
-        }else{
-            
+        } else {
+            fetchData();
+           
         }
     }, [isLoggedIn]);
-    
+
+    const fetchData = async () => {
+        // 获取保存在本地存储中的令牌
+
+        const apiUrl = `/user-profile/`;
+        try {
+            const data = await fetch_data_token_get(apiUrl, token);
+            if (data.error) {
+                console.log('fetchData response data.message:', data.message);
+            } else {
+                console.log('fetchData response:', data);
+            }
+            setUserData(data);
+           
+        } catch (error) {
+            // 处理错误
+            console.error('fetchData error:', error);
+        }
+    };
+
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -81,65 +107,107 @@ export const UserApply = ({ className }: UserApplyProps) => {
         // 在登录成功后，关闭模态框
         closeModal();
     };
-
+    
+   
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateName(e.target.value));
-        console.log("Name is:", e.target.value);
+        console.log('Name is:', e.target.value);
     };
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(updateEmail(e.target.value));
-        console.log("Email is:", e.target.value);
+        console.log('Email is:', e.target.value);
     };
 
     const handleSubmission = () => {
-        console.log("userInfo:", userInfo);
+        console.log('userInfo:', userInfo);
     };
 
     const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
         // 如果未登录，打开 modal，否则跳转到下一页
         event.preventDefault();
-        console.log("isLoggedIn:", isLoggedIn);
+        console.log('isLoggedIn:', isLoggedIn);
         if (!isLoggedIn) {
-            console.log("openModal:openModal");
+            console.log('openModal:openModal');
             openModal();
         } else {
             // 在这里可以使用编程式导航，或者使用 Link 跳转
-            console.log("navigate:/react/userapply2");
-            navigate('/react/userapply2'); 
+            console.log('navigate:/react/userapply2');
+            navigate('/react/userapply2');
+            initialdispatch();
         }
     };
 
+    const firstusername = userData.length > 0 ? userData[0].username : undefined;
+    const firstEmail = userData.length > 0 ? userData[0].email : undefined;
+    
+    const initialdispatch = async () => {
+        // 获取保存在本地存储中的令牌
 
-    return <div className={classNames(styles.root, className)}>
-        <div className={classNames(styles.flowImage)}></div>
-        <div className={classNames(styles.FormRow)}></div>
-        <div className={styles.FromArea}>
-            <div className={classNames(styles.FormRow)}>
-                <Form.Control type="text" placeholder="Name" value={userInfo.name} onChange={handleNameChange} />
-            </div>
-            <div className={classNames(styles.FormRow)}></div>
-            <div className={classNames(styles.FormRow)}></div>
+        if (firstusername) {
+            // 调用navigate函数
+            dispatch(updateName(firstusername));
+        } else {
+            // 处理redirectLink为undefined的情况，例如给出一个默认值或者采取其他逻辑
+            console.error('firstusername is undefined');
+        }
 
-            <div className={classNames(styles.FormRow)}>
-                <Form.Control type="text" placeholder="Email" value={userInfo.email} onChange={handleEmailChange} />
+        if (firstEmail) {
+            // 调用navigate函数
+            dispatch(updateEmail(firstEmail));
+        } else {
+            // 处理redirectLink为undefined的情况，例如给出一个默认值或者采取其他逻辑
+            console.error('firstEmail is undefined');
+        }
+    };
+
+    return (
+        <div className={classNames(styles.root, className)}>
+            <div className={classNames(styles.flowImage)}></div>
+            <div className={classNames(styles.FormRow)}></div>
+            <div className={styles.FromArea}>
+                <div className={classNames(styles.FormRow)}>
+                    <Form.Control
+                        type="text"
+                        placeholder={firstusername}
+                        value={userInfo.name}
+                        readOnly={true}
+                        onChange={handleNameChange}
+                    />
+                </div>
+                <div className={classNames(styles.FormRow)}></div>
+                <div className={classNames(styles.FormRow)}></div>
+
+                <div className={classNames(styles.FormRow)}>
+                    <Form.Control
+                        type="text"
+                        placeholder={firstEmail}
+                        value={userInfo.email}
+                        readOnly={true}
+                        onChange={handleEmailChange}
+                    />
+                </div>
+                <div className={classNames(styles.FormRow)}></div>
+                <div className={classNames(styles.FormRow)}></div>
+                <div className={classNames(styles.FormRow)}>
+                    <Link to="/react/userapply2" onClick={handleLinkClick}>
+                        <Button variant="primary">Next page</Button>{' '}
+                    </Link>
+                </div>
             </div>
-            <div className={classNames(styles.FormRow)}></div>
-            <div className={classNames(styles.FormRow)}></div>
-            <div className={classNames(styles.FormRow)}><Link to="/react/userapply2" onClick={handleLinkClick}><Button variant="primary">Next page</Button>{' '}</Link></div>
+            <div>
+                <Modal
+                    isOpen={isModalOpen}
+                    onRequestClose={closeModal}
+                    contentLabel="Modal Dialog"
+                    ariaHideApp={true}
+                    shouldCloseOnOverlayClick={true}
+                    style={modalStyles} // 设置模态框的样式
+                >
+                    {/* 在模态框中渲染 Login 组件 */}
+                    <SignCard redirectLink="/react/userapply" onLogin={handleLogin} />
+                </Modal>
+            </div>
         </div>
-        <div>
-            <Modal
-                isOpen={isModalOpen}
-                onRequestClose={closeModal}
-                contentLabel="Modal Dialog"
-                ariaHideApp={true}
-                shouldCloseOnOverlayClick={true}
-                style={modalStyles} // 设置模态框的样式
-            >
-                {/* 在模态框中渲染 Login 组件 */}
-               <SignCard onLogin={handleLogin} />
-            </Modal>
-        </div>
-    </div>;
+    );
 };

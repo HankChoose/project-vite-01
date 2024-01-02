@@ -98,17 +98,18 @@ export const TopBar = ({ className }: TopBarProps) => {
             <span className={classNames(styles.logoWord)}></span>
         </div>
       </a>
-      <a href="https://zhiyouyuec.com"><BsHouseFill />Home</a>
+     
       
     </div>
-    <Link to="/react/testlink"> T </Link>
+   
     <div  className={classNames(styles.toRowUser)}>
+       <a href="https://zhiyouyuec.com"><BsHouseFill />Home</a>
       <Link to="/react/userapply"><BsSendPlusFill />Demand</Link>
       {isLoggedIn ?  (
           // 用户已登录，显示账户信息和登出按钮
           <>
           <Link to="/react/signin"  onClick={handleLogout}><BsPersonFillDash />Log Out</Link>
-          <Link to="/react/userprofile"><BsPersonVcard />Account</Link>
+          <Link to="/react/userprofile"><BsPersonVcard />My Account</Link>
           </>
         ) : (
           // 用户未登录，显示登录按钮或登录表单

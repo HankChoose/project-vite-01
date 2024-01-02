@@ -99,14 +99,12 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
             <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.demand_type}</td>
-                <td>{item.demand_description}</td>
+                <td><a href={`userapplycontent/${item.id}`} target="_self" rel="noopener noreferrer">
+                       {item.demand_description}
+                    </a></td>
                 <td>{item.username}</td>
                 <td>{item.email}</td>
-                <td>
-                    <a href={`userapplycontent/${item.id}`} target="_blank" rel="noopener noreferrer">
-                        Open
-                    </a>
-                </td>
+               
             </tr>
         ));
     };
@@ -138,22 +136,22 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
                 {/* 表头 */}
                 <thead>
                     <tr>
-                        <th className={styles.handpoint} onClick={() => handleSortChange('id')} >ID
+                        <th style={{ width: '80px', textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('id')} >ID
                             {sortedField === 'id' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th className={styles.handpoint} onClick={() => handleSortChange('demand_type')}>Demand Type
+                        <th style={{ width: '150px' , textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('demand_type')}>Type
                             {sortedField === 'demand_type' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th className={styles.handpoint} onClick={() => handleSortChange('demand_description')}>Demand Description
+                        <th style={{ width: '450px', textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('demand_description')}>Content
                             {sortedField === 'demand_description' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th className={styles.handpoint} onClick={() => handleSortChange('username')}>Username
+                        <th style={{ width: '150px', textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('username')}>Username
                             {sortedField === 'username' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th className={styles.handpoint} onClick={() => handleSortChange('email')}>Email
+                        <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Email
                             {sortedField === 'email' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th></th>
+                       
                         {/* 其他属性的表头... */}
                     </tr>
                 </thead>

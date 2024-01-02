@@ -50,8 +50,9 @@ function App() {
                     <div className={styles.App}>
                         <Routes>
                             <Route path="/react" element={<Home />} />
-                            <Route path="/react/signin" element={<SignCard formType="signin" />} />
-                            <Route path="/react/signup" element={<SignCard formType="signup" />} />
+                            <Route path="/react/signin" element={<SignCard formType="signin"  redirectLink='/react/userprofile'/>} />
+                            <Route path="/react/signup" element={<SignCard formType="signup"  redirectLink='/react/userprofile'/>} />
+                            <Route path="/react/resetpw" element={<SignCard formType="resetpw"  redirectLink='/react/userprofile'/>} />
                             <Route path="/react/userapply" element={<Provider store={store}><UserApply /></Provider>} />
                             <Route path="/react/userapply2" element={<Provider store={store}><UserApply2 /></Provider>} />
                             <Route path="/react/userapply3" element={<Provider store={store}><UserApply3 /></Provider>} />
@@ -60,7 +61,6 @@ function App() {
                             <Route path="/react/checkemail" element={<TestCheckEmail />} />
                             <Route path="/react/checkemail2" element={<TestCheckEmail2 />} />
                             <Route path="/react/userapplycontent/:id" element={<UserApplyContent />} />
-                            <Route path="/react/resetpw" element={<SignCard formType="resetpw" />} />
                             <Route path="/react/testtoken" element={<TestToken />} />
                             <Route path="/react/testlist" element={<TestList />} />
                             <Route path="/react/testlink" element={<TestLink />} />

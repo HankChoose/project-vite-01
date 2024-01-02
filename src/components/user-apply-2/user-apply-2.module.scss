@@ -7,13 +7,13 @@
     align-items: center;
     justify-items: center;
     border-radius: 0.8em;
-    height: 100vh;
+    height: auto;
     margin: 0px;
     min-width: 700px;
 }
 
 .flowImage2 {
-    background-image: url('../../assets/self/userapply2.png');
+    background-image: url('../../assets/images/self/userapply2.png');
     /* 图片路径 */
     height: 20vh;
     background-repeat: no-repeat;
@@ -71,4 +71,3 @@
     align-content: space-around;
     overflow: visible;
 }
-

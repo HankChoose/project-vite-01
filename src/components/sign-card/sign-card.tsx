@@ -5,15 +5,14 @@ import * as Yup from 'yup';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
-import Cookies from 'js-cookie';
-import { baseUrl } from '../../constants';
 import { useAuth } from '../../AuthContext';
+import {  axios_form_data_post, axios_json_data_post,axios_json_data_get  } from '../../apiService';
 
 export interface SignCardProps {
     className?: string;
     formType?: 'signin' | 'signup' | 'resetpw';
     onLogin?: (email: string, password: string) => void; // Specify void as the return type
+    redirectLink?: string | undefined;
 }
 
 const validationSchemaSignin = Yup.object().shape({
@@ -52,77 +51,67 @@ const validationSchemaResetpw = Yup.object().shape({
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
-export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardProps) => {
+export const SignCard = ({ className, formType = 'signin', redirectLink, onLogin }: SignCardProps) => {
 
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [loginStatus, setLoginStatus] = useState<string | null>(null);
     const [emailExistenceStatus, setEmailExistenceStatus] = useState<string | null>(null);
     const [emailExistAfter, setemailExistAfter] = useState(false);
-     const { isLoggedIn, signIn, signOut } = useAuth();
+    const { isLoggedIn, signIn, signOut } = useAuth();
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
-    
-    
-    const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token
+
     const navigate = useNavigate();
     //-------------------------------------------------------->>handleSignIn
     const handleSignIn = async (values: FormikValues) => {
         // Logic for handling sign-in form submission
         console.log('Handling sign-in form submission:', values);
         // Add code to submit data for sign-in
-        //axios.defaults.headers.common['X-CSRFToken'] = csrfToken;
-      
-        const apiUrl = `${baseUrl}/accounts/login/`;
-        const apiUrl2 = `${baseUrl}/user-token/`;
+
+        const apiUrl = `/user-token/`;
         const userData = {
             username: values.email,
             password: values.password,
             // 添加要发送给Django的数据
         };
-
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken, // 你的CSRF令牌的名称可能不同
-            },
-        };
-        
-        console.log('Handling sign-in form userData:', userData,config);
-
+        console.log('Handling sign-in form userData:', userData);
         try {
-                const response = await axios.post(apiUrl2, userData,config);
-                if (response.status === 200) {
-                    // 跳转到用户首页或执行其他登录后的逻辑
-                    //history.push('/userhome');
-                    console.log('Login OK',response.data);
-                    localStorage.setItem('accessToken', response.data.token);
-                    console.log('response2.data.token',response.data.token);
-                    const loginSuccess = true;/* 模拟请求返回的值 */ 
-                    setLoginStatus(loginSuccess ? 'Login successful' : 'Email or password is incorrect');
-                    // 在这里进行你的其他操作，比如存储在本地存储中
-                    signIn();
-                    if (onLogin) {
-                        onLogin(values.email,values.password);
-                    } else {
-                        // Handle the case where onLogin is not defined, if needed
-                        console.error('onLogin is not defined');
-                    }
-                    navigate('/react/userprofile'); // 在 useEffect 中调用 navigate
-                } else {
-                    console.error('Login failed');
-                    const loginSuccess = false;/* 模拟请求返回的值 */ 
-                    setLoginStatus(loginSuccess ? 'Login successful' : 'Email or password is incorrect');
-                }
-                console.log(response.data);
-            } catch (error) {
-                console.error('Error creating user:', error);
+            const data = await axios_json_data_post(apiUrl,userData);
+            if (data.error){
+                console.log('GET Response sign fail data.message:', data.message);
                 const loginSuccess = false;/* 模拟请求返回的值 */ 
                 setLoginStatus(loginSuccess ? 'Login successful' : 'Email or password is incorrect');
+            }else{
+                console.log('GET Response sign OK:', data);
+                localStorage.setItem('accessToken', data.token);
+                console.log('GET Response.data.token',data.token);
+                const loginSuccess = true;/* 模拟请求返回的值 */ 
+                setLoginStatus(loginSuccess ? 'Login successful' : 'Email or password is incorrect');
+                // 在这里进行你的其他操作，比如存储在本地存储中
+                signIn();
+                if (onLogin) {
+                    onLogin(values.email,values.password);
+                } else {
+                    // Handle the case where onLogin is not defined, if needed
+                    console.error('onLogin is not defined');
+                }
+                if (redirectLink) {
+                    // 调用navigate函数
+                    navigate(redirectLink);
+                } else {
+                    // 处理redirectLink为undefined的情况，例如给出一个默认值或者采取其他逻辑
+                    console.error('redirectLink is undefined');
+                }
             }
-    
+        } catch (error) {
+            // 处理错误
+            console.error('handleSignIn error:', error);
+             const loginSuccess = false;/* 模拟请求返回的值 */ 
+            setLoginStatus(loginSuccess ? 'Login successful' : 'Email or password is incorrect');
+        }
     };
 
     //------------------------------------------------------->handleSignUp
@@ -131,9 +120,8 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
         console.log('Handling sign-up form submission:', values);
         // Add code to submit data for sign-up
 
-        const apiUrl = `${baseUrl}/accounts/signup/`;
-        const apiUrl2= `${baseUrl}/user-token/`;
-
+        const apiUrl = `/accounts/signup/`;
+      
         // Split the email address at the "@" symbol
         const parts = values.email.split('@');
 
@@ -146,57 +134,68 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
         };
         console.log('Handling sign-up form userData:', userData);
 
-        const config = {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-CSRFToken': csrfToken, // 你的CSRF令牌的名称可能不同
-            },
-        };
-    
         try {
-            const response = await axios.post(apiUrl, userData,config);
-            if (response.status === 200) {
-                // 跳转到用户首页或执行其他登录后的逻辑
-                //history.push('/userhome');
-                console.log('Sign-up OK',response.data);
-                const response2 = await axios.post(apiUrl2, {
-                     username: userData.email,
-                     password: userData.password1,
-                });
-                console.log('Login2 OK',response2.data);
-                localStorage.setItem('accessToken', response2.data.token);
-                console.log('response2.data.token',response2.data.token);
-                // 在这里进行你的其他操作，比如存储在本地存储中
-                signIn();
-                if (onLogin) {
-                    onLogin(values.email,values.password);
-                } else {
-                    // Handle the case where onLogin is not defined, if needed
-                    console.error('onLogin is not defined');
+            const data = await axios_form_data_post(apiUrl,userData,'multipart/form-data');
+            if (data.error){
+                console.log('GET Response signup failed data.message:', data.message);
+            }else{
+                console.log('GET Response Signup OK:', data);
+                const apiUrl2 = `/user-token/`;
+                 const userData2 = {
+                    username: values.email,
+                    password: values.password,
+                    // 添加要发送给Django的数据
+                };
+
+                const data2 = await axios_json_data_post(apiUrl2,userData2);
+                if (data2.error){
+                    console.log('GET Response signup get token fail data.message:', data.message);
+                    const loginSuccess = false;/* 模拟请求返回的值 */ 
+                   
+                }else{
+                    console.log('GET Response signup get token OK:', data2);
+                    localStorage.setItem('accessToken', data2.token);
+                    console.log('GET Response.data2.token',data2.token);
+                    // 在这里进行你的其他操作，比如存储在本地存储中
+                    signIn();
+                    if (onLogin) {
+                        onLogin(values.email,values.password);
+                    } else {
+                        // Handle the case where onLogin is not defined, if needed
+                        console.error('onLogin is not defined');
+                    }
+                    if (redirectLink) {
+                        // 调用navigate函数
+                        navigate(redirectLink);
+                    } else {
+                        // 处理redirectLink为undefined的情况，例如给出一个默认值或者采取其他逻辑
+                        console.error('redirectLink is undefined');
+                    }
                 }
-                navigate('/react/userprofile'); // 在 useEffect 中调用 navigate
-               
-            } else {
-                console.error('Login failed');
+
             }
         } catch (error) {
-        console.error('Error creating user:', error);
+            // 处理错误
+            console.error('handleSignUp error:', error);
         }
     };
 
     //------------------------------------------------------>heckEmailExistence
     const checkEmailExistence = async (values: FormikValues) => {
-        const apiUrl = `${baseUrl}/check-email-exist/${values.email}/`;
+        const apiUrl = `/check-email-exist/${values.email}/`; 
         try {
-            const response = await axios.get(apiUrl);
-            const data = response.data;
-            const exists = data.exists;
-            if (exists === true) {
+            const data = await axios_json_data_get(apiUrl);
+            if (data.error){
+                console.log('GET Response Password reset email sent: failed data.message:', data.message);
+            }else{
+                console.log('GET Response Password reset email sent:', data);
+                const exists = data.exists;
+                if (exists === true) {
                 // 邮箱存在的情况下的处理逻辑
                 console.log('Email exists!');
                 // 执行下一步操作...
                 const emailExists = true;/* 模拟请求返回的值 */ 
-                setEmailExistenceStatus(emailExists ? 'The email already in use. click Forgot my password of Sign in to verify the email' : 'OK,Email can be used');
+                setEmailExistenceStatus(emailExists ? 'The email already in use. click Forgot my password of Sign in to verify the email' : '');
                 setemailExistAfter(emailExists);
             } else if (exists === false) {
                 // 邮箱不存在的情况下的处理逻辑
@@ -204,17 +203,18 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
                 // 执行下一步操作...
                 // 执行下一步操作...
                 const emailExists = false;/* 模拟请求返回的值 */ 
-                setEmailExistenceStatus(emailExists ? 'The email already in use. click Forgot my password of Sign in to verify the email' : 'OK,Email can be used');
+                setEmailExistenceStatus(emailExists ? 'The email already in use. click Forgot my password of Sign in to verify the email' : '');
                 setemailExistAfter(emailExists);
                 //handleSignUp(values);
             } else {
                 // 数据尚未加载或加载过程中的处理逻辑
                 console.log('Loading data...');
             }
+            }
         } catch (error) {
-            console.error('Error checking email existence:', error);
-            throw error;
-        }
+            // 处理错误
+            console.error('checkEmailExistence error:', error);
+        } 
     };
 
     //------------------------------------------------------>handleResetPassword
@@ -226,31 +226,24 @@ export const SignCard = ({ className, formType = 'signin', onLogin}: SignCardPro
         const userData = {
             email: values.email,
         };
-        const config = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'X-CSRFToken': csrfToken, // 你的CSRF令牌的名称可能不同
-            },
-            body: JSON.stringify(userData),
-        };
-        const apiUrl = `${baseUrl}/accounts/password/reset/`;
+        const apiUrl = `/accounts/password/reset/`;
         try {
-            const response = await axios.post(apiUrl, userData,config);
-            if (response.status === 200) {
-                console.log('Password reset email sent:', response.data);
+            const data = await axios_form_data_post(apiUrl,userData,'application/x-www-form-urlencoded');
+            if (data.error){
+                console.log('GET Response Password reset email sent: failed data.message:', data.message);
+            }else{
+                console.log('GET Response Password reset email sent:', data);
                 if (onLogin) {
                     onLogin(values.email,values.password);
                 } else {
                     // Handle the case where onLogin is not defined, if needed
                     console.error('onLogin is not defined');
                 }
-            } else {
-                console.error('Password reset email sent failed');
-            }  
+            }
         } catch (error) {
-        console.error('Error sending password reset email:', error);
-        }
+            // 处理错误
+            console.error('handleResetPassword error:', error);
+        }   
     };
 
     const validationSchema =
