@@ -52,6 +52,40 @@
                 "filePath": "react-icons/bs",
                 "exportName": "BsPersonFill",
                 "name": "BsPersonFill"
+            } ,
+			{
+                "filePath": "react-icons/md",
+                "exportName": "MdDelete",
+                "name": "MdDelete"
+            },
+
+            {
+                "filePath": "react-icons/fa6",
+                "exportName": "FaArrowRotateRight",
+                "name": "FaArrowRotateRight"
+            },
+
+            {
+                "filePath": "react-icons/lu",
+                "exportName": "LuExpand",
+                "name": "LuExpand"
+            },
+
+            {
+                "filePath": "react-icons/fa",
+                "exportName": "FaArrowLeft",
+                "name": "FaArrowLeft"
+            },
+            {
+                "filePath": "react-icons/fa",
+                "exportName": "FaArrowRight",
+                "name": "FaArrowRight"
+            },
+
+            {
+                "filePath": "react-icons/ai",
+                "exportName": "AiFillHome",
+                "name": "AiFillHome"
             }
         ]
     }
