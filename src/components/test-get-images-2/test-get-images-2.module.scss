@@ -1,0 +1,12 @@
+.root {
+}
+
+.thumbnailContainer {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px; /* 调整缩略图高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

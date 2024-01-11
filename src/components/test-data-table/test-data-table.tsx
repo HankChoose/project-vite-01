@@ -2,28 +2,28 @@ import classNames from 'classnames';
 import styles from './test-data-table.module.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, Button } from 'react-bootstrap';
 import { FromRowRight } from '../from-row-right/from-row-right';
 import { FromRowSeparate } from '../from-row-separate/from-row-separate';
 import { FcUp, FcDown } from 'react-icons/fc';
+import { baseUrl } from '../../constants';
+import { TestGetImages } from '../test-get-images/test-get-images';
 
 interface Data {
-    id: string;
-    apply_type: string;
-    requirements: string;
-    username: string;
-    email: string;
-    main_image_id: string | number;
-	image_path0: string;
-	image_path1: string;
-	image_path2: string;
-	apply_time: Date;
-	comment: string;
-	comment2: string;
-    [key: string]: string | number | Date; // 允许使用字符串索引
-    // 其他属性...
+  id: string;
+  apply_type: string;
+  requirements: string;
+  username: string;
+  email: string;
+  image_path_main: string;
+  apply_time: Date; // Change the type to Date
+  comment: string;
+  comment2: string;
+  [key: string]: string | Date; // Adjust the index signature if needed
+  // Other properties...
 }
+
 
 export interface TestDataTableProps {
     className?: string;
@@ -39,6 +39,13 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
     const [pageSize, setPageSize] = useState(5); // 每页显示的数据量
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' 或 'desc'
     const [sortedField, setSortedField] = useState('id'); // 按照哪个字段排序
+    const [imageData, setImageData] = useState<string | null>(null);
+    
+    /*
+    useEffect(() => {
+        renderTableBody ();
+    }, []);
+    */
 
     // 过滤数据
     const filteredData = data.filter((item: Data) => {
@@ -87,8 +94,8 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
         setSortedField(field);
         setSortOrder(prevOrder => (prevOrder === 'asc' ? 'desc' : 'asc'));
     };
-
-
+   
+    
     const renderTableBody = () => {
         if (filteredData.length === 0) {
             // 如果没有符合条件的数据，显示一行没有数据的行
@@ -100,28 +107,32 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
 
             );
         }
-
+ 
         return currentData.map((item) => (
+
             <tr key={item.id}>
                 <td>{item.id}</td>
-               
-                <td>{item.apply_type}</td>
-                <td><a href={`userapplycontent/${item.id}`} target="_self" rel="noopener noreferrer">
+                <td>
+                    <a href={`userapplycontent/${item.id}`} target="_self" rel="noopener noreferrer">
+                            <TestGetImages imageInfo={item.image_path_main} />
+                    </a>
+                </td>
+                <td>
+                    <a href={`userapplycontent/${item.id}`} target="_self" rel="noopener noreferrer">
                        {item.requirements}
-                    </a></td>
+                    </a>
+                </td>
+                <td>{item.apply_type}</td>
                 <td>{item.username}</td>
-                <td>{item.email}</td>
-                <td>{item.image_path0}</td>
-                <td>{item.image_path1}</td>
-                <td>{item.image_path2}</td>
-                <td>{item.main_image_id}</td>
+                <td>{item.apply_time.toLocaleString()}</td>
                
             </tr>
         ));
     };
 
+   
+
     return (
-      
         <div className={classNames(styles.root)}>
             <FromRowSeparate>
                 <div>
@@ -147,37 +158,26 @@ export const TestDataTable = ({ className, data }: TestDataTableProps) => {
                 {/* 表头 */}
                 <thead>
                     <tr>
-                        <th style={{ width: '80px', textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('id')} >ID
+                        <th style={{ width: '80px', textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('id')} ><span className={styles.TableTitleText}>ID</span>
                             {sortedField === 'id' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th style={{ width: '150px' , textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('apply_type')}>Type
-                            {sortedField === 'apply_type' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
+                        <th style={{textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('id')} >Images
+                           {sortedField === 'image_path_main' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
                         <th style={{ width: '450px', textAlign: 'center' }}  className={styles.handpoint} onClick={() => handleSortChange('requirements')}>Content
                             {sortedField === 'requirements' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
+                         <th style={{ width: '150px' , textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('apply_type')}>Type
+                            {sortedField === 'apply_type' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
+                        </th>
                         <th style={{ width: '150px', textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('username')}>Username
                             {sortedField === 'username' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
-                        <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Email
-                            {sortedField === 'email' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
+                        <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('apply_time')}>Time
+                            {sortedField === 'apply_time' && (<span>{sortOrder === 'asc' ? <FcUp /> : <FcDown />}</span>)}
                         </th>
+                        
 
-                        <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Path0
-                           
-                        </th>
-
-                         <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Path1
-                           
-                        </th>
-
-                         <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Path2
-                           
-                        </th>
-
-                         <th style={{textAlign: 'center' }} className={styles.handpoint} onClick={() => handleSortChange('email')}>Main
-                           
-                        </th>
                        
                         {/* 其他属性的表头... */}
                     </tr>

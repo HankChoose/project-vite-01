@@ -1,0 +1,44 @@
+.root {
+}
+
+/* custom-image-gallery.scss */
+
+/* Thumbnail styles */
+.rig-thumbnail {
+  width: 150px;
+  height: 150px;
+  object-fit: cover; /* 保持图像比例 */
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+/* Carousel styles */
+.rig-container {
+  .image-gallery-slide {
+    cursor: zoom-in; /* 鼠标悬停时显示放大光标 */
+  }
+
+  .image-gallery-icon {
+    font-size: 24px; /* 左右箭头图标大小 */
+    color: #fff; /* 图标颜色，可以根据需要修改 */
+    background-color: rgba(0, 0, 0, 0.5); /* 背景颜色，可以根据需要修改 */
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8); /* 鼠标悬停时的背景颜色，可以根据需要修改 */
+    }
+  }
+
+  .image-gallery-fullscreen-button {
+    font-size: 24px; /* 全屏按钮图标大小 */
+    color: #fff; /* 图标颜色，可以根据需要修改 */
+    background-color: rgba(0, 0, 0, 0.5); /* 背景颜色，可以根据需要修改 */
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.8); /* 鼠标悬停时的背景颜色，可以根据需要修改 */
+    }
+  }
+}
+

@@ -48,6 +48,9 @@ export const UserApply3 = ({ className }: UserApply3Props) => {
     const userInfo = useSelector((state: RootState) => state.userInfo);
     const userInfo2 = useSelector((state: RootState2) => state.userInfo2);
 
+    //for map
+    const { uploadedImages } = userInfo2;
+
     console.log('userInfo-1:', userInfo);
     console.log('userInfo2-1:', userInfo2);
     const dispatch = useDispatch();
@@ -96,6 +99,7 @@ export const UserApply3 = ({ className }: UserApply3Props) => {
         })
         .then((response) => {
             console.log(response.data);
+            navigate('/react/testlisdatatable');
         })
         .catch((error) => {
             console.error('Error uploading data:', error);
@@ -127,8 +131,19 @@ export const UserApply3 = ({ className }: UserApply3Props) => {
                             <td>{userInfo2.applytype}</td>
                         </tr>
                         <tr>
-                            <td>Comment</td>
+                            <td>Content</td>
                             <td>{userInfo2.requirements}</td>
+                        </tr>
+
+                         <tr>
+                            <td>Image Files</td>
+                            <td> 
+                                {uploadedImages.map((image, index) => (
+                                    <div key={index} >
+                                        <p>File Name: {image.fileName}</p>
+                                    </div>
+                                ))}
+                            </td>
                         </tr>
                     </tbody>
                 </Table>

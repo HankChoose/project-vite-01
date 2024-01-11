@@ -38,6 +38,8 @@ export const TestLink = ({ className }: TestLinkProps) => {
       </div>
       <div>
         <Link to="/react/testupload"> testupload </Link>
+        <Link to="/react/testgetimages"> testgetimages </Link>
+        <Link to="/react/testgetimages2"> testgetimages2 </Link>
        
       </div>
     </div>;

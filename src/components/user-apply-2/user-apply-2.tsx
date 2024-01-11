@@ -221,6 +221,7 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
                     const uploadedImagesCount = userInfo2.uploadedImages.filter(
                         (image) => image.file !== null || image.filePreviewUrl !== null
                     ).length;
+                    
                     if (uploadedImagesCount >= 3) {
                         // 提示用户删除一张图片以腾出空间
                         alert('The number of pictures cannot exceed 3. Please delete any picture and upload a new picture.');

@@ -5,12 +5,6 @@ import axios, { AxiosResponse } from 'axios';
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate} from 'react-router-dom';
 
-/*
-1.Cross-Site Request Forgery csrfToken
-2.Authorization token
-3.Content-Type 'application/json','multipart/form-data'
-4.
-*/
 
 const csrfToken = Cookies.get('csrftoken'); // 获取 CSRF token Cross-Site Request Forgery
 
@@ -25,10 +19,35 @@ const handleError = (error:any) => {
 
 
 /*
+//////////////////////////////////axios_json_data_post 
+responseType: 'arraybuffer'
+1. TestGetImages
+2.(`${baseUrl}/get-image/${imageInfo}/`
+*/
+const axios_image_file_get = async (url:string) => { 
+  const console_title='axios_image_file_get';
+  try {
+    const response = await axios.get(`${baseUrl}${url}`, {
+        responseType: 'arraybuffer',
+    });
+
+    return response;
+    
+  } catch (error) {
+      console.error(console_title+ ' error:', error);
+      return handleError(console_title+ ' error:'+ error);
+      
+  }
+};
+
+
+
+
+/*
 //////////////////////////////////////fetch_data_token_get
 'Content-Type': 'application/json',
 1. /user-profile/
-2.
+2.CSRF token（Cross-site request forgery token）
 */
 const fetch_data_csrf_get = async (url:string) => {
   const console_title='fetch_data_csrf_get';
@@ -36,7 +55,7 @@ const fetch_data_csrf_get = async (url:string) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'X-CSRFToken': csrfToken ?? '', // Use an empty string if csrfToken is undefined
+      'X-CSRFToken': csrfToken || '',
       }
   };
   try {
@@ -255,4 +274,4 @@ const axios_json_data_get = async (url:string) => {
   }
 };
 
-export { fetch_data_token_get, fetch_data_token_post , axios_form_data_post, axios_json_data_post ,axios_json_data_get , fetch_data_csrf_get};
+export {axios_image_file_get, fetch_data_token_get, fetch_data_token_post , axios_form_data_post, axios_json_data_post ,axios_json_data_get , fetch_data_csrf_get};

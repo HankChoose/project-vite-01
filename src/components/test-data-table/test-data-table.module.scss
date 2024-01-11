@@ -1,8 +1,9 @@
 .root {
   padding: 4rem;
   text-align: start;
-  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
+  //box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
   width: 1200px;
+  height: 100%vh;
   display: block;
   justify-content: center;
   align-items: center;
@@ -40,4 +41,9 @@
 th {
     text-align: center; /* 水平居中 */
     vertical-align: middle; /* 垂直居中 */
+}
+
+
+.TableTitleText {
+  color: #f7f0f0ef; // 这里使用十六进制颜色码，可以根据需要更改
 }
