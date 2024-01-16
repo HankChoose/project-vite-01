@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 import axios, { AxiosResponse } from 'axios';
 import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { BsPersonUp, BsPerson, BsPersonFill, BsHouseDoor, BsHouseFill, BsSearchHeart, BsPersonFillDash, BsPersonVcard, BsSendPlusFill } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
 import { useAuth } from '../../AuthContext';
 
 
@@ -23,7 +24,9 @@ export interface TopBarProps {
  */
 export const TopBar = ({ className }: TopBarProps) => {
     const { isLoggedIn, signIn, signOut } = useAuth();
-
+    useEffect(() => {
+        document.title = 'Zhiyouyuec';
+    }, []);
     const navigate = useNavigate();
     const handleLogout = async () => {
         const token = localStorage.getItem('accessToken');
@@ -63,19 +66,21 @@ export const TopBar = ({ className }: TopBarProps) => {
                     <span className={classNames(styles.logoWord)}></span>
                 </div>
             </a>
-           
+            <a href="https://zhiyouyuec.com"><BsHouseFill />Home</a>
 
         </div>
         
         <div className={classNames(styles.toRowUser)}>
-            <Link to="/react/testlink"> T</Link>
-            <a href="https://zhiyouyuec.com"><BsHouseFill />Home</a>
-            <Link to="/react/userapply"><BsSendPlusFill />Demand</Link>
+
+           
+            <Link to="/react/testlisdatatable"><FaSearch />Search</Link>
+            <Link to="/react/userapply"><BsSendPlusFill />Post Info</Link>
             {isLoggedIn ? (
                 // 用户已登录，显示账户信息和登出按钮
                 <>
-                    <Link to="/react/signin" onClick={handleLogout}><BsPersonFillDash />Log Out</Link>
                     <Link to="/react/userprofile"><BsPersonVcard />My Account</Link>
+                    <Link to="/react/signin" onClick={handleLogout}><BsPersonFillDash />Log Out</Link>
+                    
                 </>
             ) : (
                 // 用户未登录，显示登录按钮或登录表单

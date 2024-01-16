@@ -1,5 +1,6 @@
 import { createBoard } from '@wixc3/react-board';
-import { TestDataTable } from '../../../components/test-data-table/test-data-table';
+import { TestDataGrid } from '../../../components/test-data-grid/test-data-grid';
+
 const sampleData = [
     {
         id: '1',
@@ -27,12 +28,7 @@ const sampleData = [
 ];
 
 export default createBoard({
-    name: 'TestDataTable',
-    Board: () => <TestDataTable data={sampleData} />,
+    name: 'TestDataGrid',
+    Board: () => <TestDataGrid data={sampleData} />,
     isSnippet: true,
-    environmentProps: {
-        windowHeight: 629,
-        windowWidth: 1032,
-        canvasHeight: 552
-    }
 });

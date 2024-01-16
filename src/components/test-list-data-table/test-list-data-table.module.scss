@@ -1,3 +1,39 @@
 .root {
 }
 
+
+.formRowRight {
+	border: 0px solid black;
+    display: flex;
+    height: 40px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: end;
+  }
+
+.formRowSeparate {
+    border: 0px solid black;
+    display: flex;
+    height: 40px;
+    width: auto;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .buttonStyle {
+  // 按钮的样式
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.buttonStyle:hover {
+  background-color: #45a049;
+}
+

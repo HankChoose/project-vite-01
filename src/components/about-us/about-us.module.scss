@@ -1,0 +1,85 @@
+
+.root {
+  width: 1000px; // Set a fixed width for the root container
+  height: auto; /* Set the desired height */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; // Adjust the gap between cards
+
+  .card {
+    width: calc(33.33% - 20px); // Adjust the card width based on your design
+    //width: 250px; /* Set the desired width */
+    height: 350px; /* Set the desired height */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    // Additional styling for your card
+  }
+
+
+  .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+}
+
+
+.formRowSeparate {
+    border: 0px solid black;
+    display: flex;
+    height: 40px;
+    width: 100%; /* Set width to 100% */
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+
+    .searchInput {
+        width: 48%; /* Set width for the search input */
+        text-align: left; /* Align the text to the left */
+    }
+
+    .pageSizeSelect {
+        width: 48%; /* Set width for the page size select */
+        text-align: right; /* Align the text to the right */
+    }
+}
+
+
+.formRowRight {
+    border: 0px solid black;
+    display: flex;
+    height: 60px;
+    width: 100%; /* Set width to 100% */
+    text-align: left;
+    align-items: left;
+    justify-content: left;
+
+}
+
+.imagesdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.people01 {
+    background-image: url('../../assets/images/self/self2.png');
+    /* 图片路径 */
+    width: 200px;
+    height: 200px;
+    background-repeat: no-repeat;
+    /* 图标不重复 */
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    justify-content: start;
+    align-content: center;
+    position: relative;
+}

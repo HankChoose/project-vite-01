@@ -86,6 +86,36 @@
                 "filePath": "react-icons/ai",
                 "exportName": "AiFillHome",
                 "name": "AiFillHome"
+            },
+
+            {
+                "filePath": "react-icons/io",
+                "exportName": "IoMdDownload",
+                "name": "IoMdDownload"
+            },
+
+            {
+                "filePath": "react-icons/io",
+                "exportName": "IoMdClose",
+                "name": "IoMdClose"
+            },
+
+            {
+                "filePath": "react-icons/fa",
+                "exportName": "FaSearch",
+                "name": "FaSearch"
+            },
+
+            {
+                "filePath": "react-icons/bi",
+                "exportName": "BiSolidGrid",
+                "name": "BiSolidGrid"
+            },
+
+            {
+                "filePath": "react-icons/fa",
+                "exportName": "FaListUl",
+                "name": "FaListUl"
             }
         ]
     }

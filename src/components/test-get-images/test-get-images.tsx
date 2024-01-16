@@ -70,7 +70,7 @@ export const TestGetImages: React.FC<TestGetImagesProps> = ({ className,imageInf
                 <img
                     src={imageData!}
                     alt="Preview"
-                    onMouseEnter={() => handleThumbnailHover(imageData)}
+                    //onMouseEnter={() => handleThumbnailHover(imageData)}
                     style={{
                         maxWidth: '90%',
                         maxHeight: '90%',
@@ -84,7 +84,7 @@ export const TestGetImages: React.FC<TestGetImagesProps> = ({ className,imageInf
 
             {selectedImage && (
                 <div
-                    onMouseLeave={handleThumbnailLeave}
+                    //onMouseLeave={handleThumbnailLeave}
                     className={styles.largeImageContainer}
                 >
                     <img

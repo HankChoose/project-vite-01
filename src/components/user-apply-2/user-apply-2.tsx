@@ -5,6 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useSelector, useDispatch, connect } from 'react-redux';
 import { useFormik, FormikValues } from 'formik';
 import * as Yup from 'yup';
+import { IoMdDownload,IoMdClose } from 'react-icons/io';
 import {
     addImage,
     setMainImage,
@@ -54,13 +55,21 @@ type RootState2 = {
     };
 };
 
+interface ImageInfo {
+    file: File | null;
+    fileName: string;
+    fileSize: number;
+    filePreviewUrl: string | null;
+    rotation: number;
+}
+
 /**
  * This component was created using Codux's Default new component template.
  * To create custom component templates, see https://help.codux.com/kb/en/article/kb16522
  */
 export const UserApply2 = ({ className }: UserApply2Props) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<ImageInfo | null>(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [textInput, setTextInput] = useState('');
 
@@ -69,12 +78,14 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
     const userInfo = useSelector((state: RootState) => state.userInfo);
     const userInfo2 = useSelector((state: RootState2) => state.userInfo2);
 
+    const uploadHint = "Can upload 3 pictures, each less than 3 MB"
+    const requirementErrorMessage="Between 10 and 2000 characters, cannot contain special characters such as --";
+    
     console.log('userInfo-1:', userInfo);
     console.log('userInfo2-1:', userInfo2);
 
     const dispatch = useDispatch();
     const mainImageIndex = useSelector((state: RootState2) => state.userInfo2.mainImageId);
-    const requirementErrorMessage="Between 10 and 2000 characters, cannot contain special characters such as --";
     
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     useEffect(() => {
@@ -101,6 +112,13 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
 
     const handleRemoveImage = (index: number) => {
         dispatch(removeImage(index));
+    };
+
+     const handleRotateLargeImage = (index: number, degrees: number) => {
+        if (selectedImage) {
+           dispatch(rotateImage(index, degrees));
+           console.log('index:', index, 'degrees:', degrees);
+        }
     };
 
     const handleRotateImage = (index: number, degrees: number) => {
@@ -294,7 +312,8 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
                 </div>
                 <div className={classNames(styles.FormRowSmall)}></div>
                 <h4>Uploaded Images:</h4>
-                <div className={classNames(styles.FormRow)}></div>
+                <div className={classNames(styles.FormRow)}>
+                </div>
                 <div>
                     <ul className={styles.imageGrid}>
                         {userInfo2.uploadedImages.map((image: any, index) => (
@@ -338,13 +357,20 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
                                             }}
                                             onClick={handleLargePictureClose}
                                         />
-                                        <div className={styles.fileInfoContainer}>
-                                            click image to close
-                                        </div>
+                                       
                                          <div className={styles.navigationArrows}>
                                             <FaArrowLeft onClick={handlePrevImage} />
                                             <FaArrowRight onClick={handleNextImage} />
                                         </div>
+                                        <div className={styles.largeImageButtons}>
+                                        <button className={styles.buttonStyle} onClick={() => handleRotateLargeImage(index, 90)}> 
+                                            <FaArrowRotateRight/>
+                                        </button>
+                                        <button className={styles.buttonStyle} onClick={handleLargePictureClose}>
+                                            <IoMdClose/>
+                                        </button>
+                                        
+                                    </div>
                                     </div>
                                 )}
 
@@ -395,14 +421,14 @@ export const UserApply2 = ({ className }: UserApply2Props) => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div className={classNames(styles.FormRow)}> </div>
+                <div className={classNames(styles.FormRow)}><span className={classNames(styles.uploadHintText)}>{uploadHint}</span></div>
                 <div className={classNames(styles.FormRow)}> </div>
                 <div className={classNames(styles.FormRow)}>
                     <Form.Control
                         as="textarea"
                         ref={textareaRef}
                         rows={3}
-                        placeholder="Requirements"
+                        placeholder="Content"
                         value={userInfo2.requirements}
                         onChange={handleRequirementsChange} 
                         className={inputClassName}

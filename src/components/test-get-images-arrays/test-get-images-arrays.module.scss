@@ -1,16 +1,6 @@
 .root {
-    padding: 2rem;
-    text-align: start;
-    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.12);
-    width: auto;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    border-radius: 0.8em;
-    height: auto;
-    margin: 0px;
-    min-width: 700px;
 }
+
 
 .flowImage2 {
     background-image: url('../../assets/images/self/userapply2.png');
@@ -138,15 +128,25 @@
   top: 10%;
   left: 50%;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 100%vh;
   transform: translateX(-50%);
   width: 70%;
   height: 80%;
   background-color: rgb(0, 0, 0, 0.8);
+  opacity: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+
+.largeImageContent {
+  flex-grow: 1; /* 让内容部分占据剩余空间 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .largeImageButtons {
@@ -175,12 +175,6 @@
 
 .buttonStyle:hover {
   background-color: #45a049;
-}
-
-.uploadHintText {
-  color: #1E90FF; // 谈蓝色
-  font-size: 12px; // 7号字体大小
-  //font-family: 'Times New Roman', sans-serif; // 替换 'YourFont' 为你希望使用的字体名称
 }
 
 .buttonsContainer {
@@ -252,4 +246,5 @@
 .RequirementErrorMessage {
   color: red;
 }
+
 

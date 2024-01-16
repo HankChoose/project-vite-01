@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button } from 'react-bootstrap';
-import { FromRowRight } from '../from-row-right/from-row-right';
-import { FromRowSeparate } from '../from-row-separate/from-row-separate';
+
 import {baseUrl} from '../../constants';
 
 export interface TestListProps {
@@ -113,7 +112,7 @@ export const TestList = ({ className }: TestListProps) => {
         }
     };
 
-    return <div className={classNames(styles.root, className)}>
+    return <div className={classNames(styles.root)}>
         <input
             type="text"
             placeholder="Search..."
@@ -124,7 +123,8 @@ export const TestList = ({ className }: TestListProps) => {
             }}
             
         />
-        <FromRowRight>
+  
+        <div className={classNames(styles.formRowRight)}>
             <div>
                 <label></label>
                 <select onChange={(e) => handlePageSizeChange(Number(e.target.value))} value={pageSize}>
@@ -140,7 +140,7 @@ export const TestList = ({ className }: TestListProps) => {
                     <option value="desc">Descending</option>
                 </select>
             </div>
-        </FromRowRight>
+        </div>
         <Table striped bordered hover>
             <thead>
                 <tr>
@@ -178,11 +178,11 @@ export const TestList = ({ className }: TestListProps) => {
                 ))}
             </tbody>
         </Table>
-        <FromRowSeparate>
+        <div className={classNames(styles.formRowSeparate)}>
             <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
                 Previous
             </button>
             <button onClick={() => handlePageChange(page + 1)}>Next</button>
-        </FromRowSeparate>
+        </div>
     </div>;
 };
